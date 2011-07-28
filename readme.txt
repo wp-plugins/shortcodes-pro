@@ -23,6 +23,9 @@ Shortcodes Pro allows quick and easy creation of WordPress shortcodes and TinyMC
 * Built onto the WordPress API.
 * Well Documented.
 
+More info and documentation at:  
+http://www.mattvarone.com/featured-content/shortcodes-pro/
+
 == Installation ==
 
 1. Unzip files.
