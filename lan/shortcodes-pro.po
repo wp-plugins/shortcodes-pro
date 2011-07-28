@@ -1,0 +1,531 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Shortcodes Pro\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-05-07 20:20-0300\n"
+"PO-Revision-Date: 2011-05-07 20:20-0300\n"
+"Last-Translator: Matt Varone <plugins@mattvarone.com>\n"
+"Language-Team: Matt Varone\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__e;__\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: inc/class-shortcodespro-base.php:734
+msgid "Edit"
+msgstr ""
+
+#: inc/class-shortcodespro-base.php:735
+msgid "Delete"
+msgstr ""
+
+#: inc/class-shortcodespro-main.php:228
+msgid "Add"
+msgstr ""
+
+#: inc/class-shortcodespro-main.php:229
+#: inc/shortcodespro-options.php:424
+msgid "Settings"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:77
+#: inc/class-shortcodespro-type.php:508
+msgid "Shortcode"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:78
+#: inc/class-shortcodespro-type.php:79
+msgid "Add New Shortcode"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:80
+msgid "Edit Shortcode"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:81
+msgid "New Shortcode"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:82
+msgid "View Shortcodes"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:83
+msgid "Search Shortcodes"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:84
+msgid "No Shortcode Found"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:85
+msgid "No Shortcodes Found In Trash"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:182
+msgid "Publish"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:212
+msgid "Button Image"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:243
+msgid "Delete Permanently"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:245
+msgid "Move to Trash"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:302
+#: inc/class-shortcodespro-type.php:305
+msgid "Shortcode updated."
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:303
+msgid "Custom field updated."
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:304
+msgid "Custom field deleted."
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:306
+#, php-format
+msgid "Shortcode restored to revision from %s"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:307
+msgid "Shortcode published"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:308
+msgid "Shortcode saved."
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:309
+msgid "Shortcode submitted."
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:310
+msgid "Shortcode scheduled."
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:311
+msgid "Shortcode draft updated."
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:383
+msgid "From this page you can easily change the order of your shortcodes buttons"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:384
+msgid "Drag and drop the ( || separator ) button to add spaces in between the buttons. Double click them to remove"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:385
+msgid "Changes on this page will be automatically saved"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:391
+msgid "<strong>Name</strong> - Each shortcode requires a custom name, an unique slug will be automatically generated from it. This is the action identifier of your custom shortcode"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:392
+msgid "<strong>Behavior</strong> - There are two possible behaviors, these change the way the shortcode works. \"Wrap Content With\" allows you to inject some code before and after a selection, most common and simple shortcodes can be achieved this way. \"Insert Custom Code\" gives you more freedom and the choice to accept Attribute Values and different code languages (HTML and PHP)"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:393
+msgid "<strong>Attributes</strong> - Similar to built in shortcode buttons, you can ask input for different values trough an automatically generated overlay window. At this version, it supports Text, Textarea and Select fields"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:394
+msgid "<strong>Before Selection</strong> - Set the code you want to add before the current selection"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:395
+msgid "<strong>After Selection</strong> - Set the code you want to add after the current selection"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:396
+msgid "<strong>Language</strong> - This behavior allows two types of languages. HTML and PHP. This will modify the way the plugin process the inserted code"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:397
+msgid "<strong>Code</strong> - Insert here your custom code. Insert Custom Code features template tags, these can be used as wildcards and will be replaced with dynamic content"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:398
+msgid "<strong>Enable</strong> - Mark the checkbox to generate a custom TinyMCE button"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:399
+msgid "<strong>Prevent</strong> - The Prevent feature will alert the user if there is no selection present"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:400
+msgid "<strong>Row</strong> - TinyMCE ships with up to 4 rows of buttons. Select the desired row from the list"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:401
+msgid "<strong>Button Image</strong> - Use to set the button's image. Works exactly as <a href=\"http://en.support.wordpress.com/featured-images/#setting-a-featured-image\" title=\"Featured Images\">Featured Images</a>. Best results are with images of 20x20 pixels"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:416
+msgid "Shortcodes Pro &mdash; Premium Plugin"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:417
+msgid "FAQ"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:418
+msgid "Documentation"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:419
+msgid "Updates"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:420
+msgid "Version Installed:"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:509
+#: inc/class-shortcodespro-type.php:884
+#: inc/class-shortcodespro-type.php:922
+msgid "Action"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:510
+#: inc/class-shortcodespro-type.php:900
+#: inc/class-shortcodespro-type.php:914
+msgid "Attributes"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:511
+#: inc/class-shortcodespro-type.php:892
+msgid "Behavior"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:512
+msgid "Button"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:513
+#: inc/class-shortcodespro-type.php:1048
+msgid "Row"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:580
+#: inc/class-shortcodespro-type.php:585
+msgid "none"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:595
+msgid "enabled"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:597
+msgid "disabled"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:684
+msgid "Add New Attribute"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:720
+msgid "New Attribute Details"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:735
+#: inc/class-shortcodespro-type.php:938
+msgid "Add Attribute"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:770
+msgid "Edit Attribute"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:822
+msgid "Edit Attribute Details"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:838
+msgid "Update Attribute"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:870
+msgid "Shortcode Details"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:876
+msgid "Name"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:877
+msgid "Enter the shortcode name."
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:887
+msgid "Use this action to trigger the shortcode."
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:893
+msgid "Select the type of behavior you want to apply to this shortcode."
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:901
+msgid "Check to enable attributes for this shortcode."
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:922
+msgid "Order"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:922
+#: inc/class-shortcodespro-type.php:1107
+msgid "Slug"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:922
+#: inc/class-shortcodespro-type.php:1116
+msgid "Label"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:948
+msgid "Wrap Content With"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:954
+msgid "Before selection"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:955
+msgid "Enter the HTML code to insert before the selection."
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:962
+msgid "After selection"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:963
+msgid "Enter the HTML code to insert after the selection."
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:976
+msgid "Insert Custom Code"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:982
+msgid "Language"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:983
+msgid "Select the code language."
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:991
+#: inc/class-shortcodespro-type.php:1000
+#: inc/class-shortcodespro-type.php:1008
+msgid "Code"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:992
+#, php-format
+msgid ""
+"Enter the code to insert. \n"
+"\t\t\t\t\t\tUse the template tag <strong>%%content%%</strong> to access the shortcode content (selection).<span class=\"attributes-desc\" style=\"display:none\"> Use <strong>%%attribute_slug%%</strong> to access the attributes values.</span>"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1001
+#, php-format
+msgid "Enter the code to insert. Use the template tag <strong>%%content%%</strong> to access the shortcode content (selection).\t<span class=\"attributes-desc\" style=\"display:none\"> Use <strong>%%attribute_slug%%</strong> to access the attributes values.</span>"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1009
+msgid "Enter the code to run. Return your result. Use the variable <strong>$content</strong> to access the current content selection ( if any ). <span class=\"attributes-desc\" style=\"display:none\"> Use <strong>$atts</strong> to access the attributes values <em>(array)</em>.</span>"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1021
+msgid "Rich Editor Button"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1027
+msgid "Enable"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1028
+msgid "Check to include a button to access this shortcode on the rich text editor."
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1041
+msgid "Prevent"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1042
+msgid "Check to prevent this shortcode for running when no content is selected."
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1049
+msgid "Select the row where you want to include this button. ( <a href=\""
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1057
+msgid "Short Description"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1058
+msgid "Enter a one line description for this shortcode button."
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1064
+msgid "Long Description"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1065
+msgid "Enter a more detailed description for this shortcode button."
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1071
+msgid "Overlay width"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1072
+msgid "Enter the width of the overlay window. ( pixels )"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1078
+msgid "Overlay height"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1079
+msgid "Enter the height of the overlay window. ( pixels )"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1108
+msgid "Enter the slug for this attribute. Used to retrieve this attribute value.<br/> Allowed: a-z,0-9 ( examples: color, size, videoid, fileurl )"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1117
+msgid "Enter a label for this attribute. ( Used on the rich editor button )"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1125
+msgid "Type"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1126
+msgid "Select the attribute type. ( Used on the rich editor button )"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1138
+msgid "Options"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1139
+msgid "Use the following syntax to add multiple options:<br/><div id=\"sphelp\" style=\"padding: 15px;width: 90%;background: #f4f4f4;border: 1px dotted #ddd;font-style: normal;\"><strong>OptionName1|OptionValue1,<br/>OptionName2|OptionValue2,</strong><br/>[etc]<br/><br/>eg: Small|12px,Normal|16px,Huge|21px</div>"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1148
+msgid "Default Value"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1149
+msgid "Enter the default value."
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1157
+msgid "Desc"
+msgstr ""
+
+#: inc/class-shortcodespro-type.php:1158
+msgid "Enter a description for this attribute. ( Used on rich editor button )"
+msgstr ""
+
+#: inc/shortcodespro-edit-js.php:98
+#: inc/shortcodespro-edit-js.php:139
+msgid "Please make a selection."
+msgstr ""
+
+#: inc/shortcodespro-options.php:35
+msgid "Sort Buttons"
+msgstr ""
+
+#: inc/shortcodespro-options.php:104
+msgid "Drag and drop the buttons to sort their display order."
+msgstr ""
+
+#: inc/shortcodespro-options.php:106
+msgid "Use the separator bellow to add a space between your buttons. <span class=\"note\">( Double click separators to remove )</span>"
+msgstr ""
+
+#: inc/shortcodespro-options.php:109
+#: inc/shortcodespro-options.php:367
+msgid "Separator"
+msgstr ""
+
+#: inc/shortcodespro-options.php:112
+msgid "Row 1"
+msgstr ""
+
+#: inc/shortcodespro-options.php:124
+msgid "Row 2"
+msgstr ""
+
+#: inc/shortcodespro-options.php:135
+msgid "Row 3"
+msgstr ""
+
+#: inc/shortcodespro-options.php:146
+msgid "Row 4"
+msgstr ""
+
+#: inc/shortcodespro-options.php:425
+msgid "Hide Shortcodes Pro menu:"
+msgstr ""
+
+#: inc/shortcodespro-options.php:448
+msgid "Shortcodes Pro Options"
+msgstr ""
+
+#: inc/shortcodespro-options.php:455
+msgid "Save Changes"
+msgstr ""
+
+#: inc/shortcodespro-options.php:458
+msgid "<strong>Remember</strong>: <em>You can use WordPress built in <a href=\"import.php\" title=\"Import\">Import</a>/<a href=\"export.php\" title=\"Export\">Export</a> feature to backup and migrate your custom shortcodes</em>."
+msgstr ""
+
+#: inc/shortcodespro-overlay.php:18
+msgid "Cheating??. Please verify your settings"
+msgstr ""
+
+#: inc/shortcodespro-overlay.php:25
+#: inc/shortcodespro-runshortcode.php:21
+msgid "Shortcode not found. Please verify your settings"
+msgstr ""
+
+#: inc/shortcodespro-overlay.php:32
+msgid "The Shortcode does not exist. Please verify your settings"
+msgstr ""
+
+#: inc/shortcodespro-overlay.php:40
+msgid "Shortcode button not enabled. Please verify this shortcode settings."
+msgstr ""
+
+#: inc/shortcodespro-overlay.php:45
+msgid "Shortcode Error. Please verify this shortcode settings."
+msgstr ""
+
+#: inc/shortcodespro-overlay.php:179
+msgid "Cancel"
+msgstr ""
+
+#: inc/shortcodespro-overlay.php:183
+msgid "Insert"
+msgstr ""
+
