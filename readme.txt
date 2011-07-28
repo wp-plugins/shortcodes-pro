@@ -1,0 +1,85 @@
+=== Shortcodes Pro ===
+Contributors: sksmatt
+Donate link: http://www.mattvarone.com/donate/
+Tags: shortcodes, TinyMCE, quicktags, buttons, generator, editor, toolbar
+Requires at least: 3.2
+Tested up to: 3.2.1
+Stable tag: 1.0.9.9
+
+Shortcodes Pro gives you complete control of your shortcodes and rich editor buttons.
+
+== Description ==
+
+Shortcodes Pro gives you complete control of your shortcodes and rich editor buttons.
+
+* Create infinite custom shortcodes from inside WordPress.
+* Add seamless TinyMCE buttons and Quick-tags easily.
+* Sort buttons quickly and split them with separators to create groups.
+* Accept shortcode variables with automatically generated overlay windows.
+* Process the shortcodes with HTML or PHP.
+* Supports import/export of all created shortcodes.
+* Uses WordPress built-in cache class for fast performance.
+* Allows to hide the Shortcodes Pro menu for a less cluttered interface.
+* Built onto the WordPress API.
+* Well Documented.
+
+== Installation ==
+
+1. Unzip files.
+2. Upload the folder into your plugins directory.
+3. Activate the plugin.
+4. Add new shortcodes based on your needs.
+5. Have fun!
+
+== Screenshots ==
+
+1. Add New Shortcode.
+2. Shortcodes management.
+3. Shortcode example.
+4. Simple Shortcode example.
+5. Simple Shortcode on action.
+
+== Change log ==
+
+= 1.0.9.9 =
+* First release on WordPress.org.
+
+= 1.0.9.8 =
+* New Feature: Uninstall included.
+* Small bug fix.
+
+= 1.0.9.7 =
+* WordPress 3.2 support.
+
+= 1.0.9.6 =
+* New Feature: Support for Quicktags ( Add buttons to the RTE on HTML view ).
+* New Feature: Admin color schemes support.
+* Code improvements.
+
+= 1.0.9.5 =
+* New Feature: Compatible with WordPress 3.2 (3.2-beta1).
+* New Feature: Built-in help.
+* Missing update issue fixed.
+* Code improvements.
+
+= 1.0.9.4 =
+* New Feature: It is possible now to drag and drop buttons from one row to another in the Sort Buttons page.
+
+= 1.0.9 =
+* Code improvements.
+
+= 1.0.8 =
+* New Feature: Prevent shortcodes from running when no content is selected.
+* New Feature: Supports nesting up to three levels of the [do] shortcode.
+* New Feature: Built-in Updates.
+* New Feature: Internationalization support.
+* Code improvements.
+
+= 1.0.7 =
+* More small bug fixes and code improvements.
+
+= 1.0.5 =
+* Small bug fixes and code improvements.
+
+= 1.0 =
+* First version out.

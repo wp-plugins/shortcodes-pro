@@ -1,0 +1,131 @@
+/**
+* Shortcodes Pro Admin CSS
+*
+* @package Shortcodes Pro
+* @author Matt Varone
+*/
+
+body {
+    font-family: "Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;
+    font-size: 12px;
+    padding: 0 15px;
+}
+#TB_ajaxContent { height: 95% }
+label {
+    font-size: 12px;
+    text-align: left;
+    float: left;
+    vertical-align: text-top;
+    margin: 0;
+    line-height: auto;
+    overflow: hidden;
+}
+label:hover { cursor: pointer }
+div.desc {
+    color: #707070;
+    font-style: italic;
+}
+.media-form {
+    border: 1px solid #ddd;
+    overflow: hidden;
+    padding: 15px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+}
+tr {
+    clear: both;
+    overflow: hidden;
+    margin-bottom: 15px;
+    display: block;
+}
+.form-table {
+    border-collapse: collapse;
+    width: 95%;
+    margin: .5em auto -8px auto;
+    clear: both;
+    overflow: hidden;
+    display: block;
+}
+.postbox input[type="text"],
+.postbox textarea,
+.stuffbox input[type="text"],
+.stuffbox textarea {
+    border-width: 1px;
+    border-style: solid;
+}
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="file"],
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+select {
+    border-color: #dfdfdf;
+    background-color: white;
+}
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="file"],
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+select {
+    border-width: 1px solid;
+    -moz-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+input[type="text"],
+input[type="password"],
+textarea {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+p,
+ul,
+ol,
+blockquote,
+input,
+select { font-size: 12px }
+h3 {
+    display: block;
+    font-size: 1.6em;
+    margin: 1em 0;
+    font-family: Georgia,"Times New Roman",Times,serif;
+    font-weight: normal;
+    color: #5a5a5a;
+}
+.button {
+    background-color: #f2f2f2;
+    background-image: url(../img/white-grad.png);
+    background-origin: padding-box;
+    border: 1px solid #bbb;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    clear: none;
+    color: #464646;
+    cursor: pointer;
+    display: inline;
+    font-family: "Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;
+    font-size: 11px;
+    height: 0;
+    line-height: 15px;
+    margin: 0;
+    outline-color: #464646;
+    outline-style: none;
+    outline-width: 0;
+    padding: 3px 10px 3px 10px;
+    text-decoration: none;
+    text-shadow: white 0 1px 0;
+    white-space: nowrap;
+}
+.sscinsert-shortcode { padding: 5px 0 }
+.shortcodes-pro-overlay th,
+.shortcodes-pro-overlay th label { overflow: hidden }
