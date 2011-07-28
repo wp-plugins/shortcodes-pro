@@ -6,11 +6,11 @@ Requires at least: 3.2
 Tested up to: 3.2.1
 Stable tag: 1.0.9.9
 
-Shortcodes Pro gives you complete control of your shortcodes and rich editor buttons.
+Shortcodes Pro allows quick and easy creation of WordPress shortcodes and TinyMCE rich editor buttons from the comfort of the WordPress interface.
 
 == Description ==
 
-Shortcodes Pro gives you complete control of your shortcodes and rich editor buttons.
+Shortcodes Pro allows quick and easy creation of WordPress shortcodes and TinyMCE rich editor buttons from the comfort of the WordPress interface.
 
 * Create infinite custom shortcodes from inside WordPress.
 * Add seamless TinyMCE buttons and Quick-tags easily.
