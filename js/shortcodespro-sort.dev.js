@@ -8,9 +8,9 @@
 jQuery(document).ready(function($) {
     var shortcodesRows = $(".target-row");
     shortcodesRows.each(function () {
-        var data = $(this).attr("data");
-        var sortList = $(this);
-        var loading = $("#loading-" + data);
+        var data = $(this).attr("data"),
+            sortList = $(this),
+            loading = $("#loading-" + data);
         sortList.sortable({
             opacity: 0.6,
             helper: "clone",
