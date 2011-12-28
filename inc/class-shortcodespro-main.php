@@ -6,7 +6,7 @@
 * @author Matt Varone
 */
 
-if ( !class_exists('MV_Shortcodes_Pro') )
+if ( ! class_exists( 'MV_Shortcodes_Pro' ) )
 {
 	
 	/* SHORTCODES PRO CLASS
@@ -15,7 +15,14 @@ if ( !class_exists('MV_Shortcodes_Pro') )
 	{	
 	
 		function __construct()
+		{	
+			add_action( 'init', array( &$this, 'init' ) );
+		}
+		
+		function init() 
 		{
+			
+			add_action( 'after_setup_theme', array( &$this, 'add_thumbnail_support' ), 9999 );
 			
 			if ( is_admin() )
 			{
@@ -24,38 +31,54 @@ if ( !class_exists('MV_Shortcodes_Pro') )
 				$this->get_buttons_by_row();
 				
 				// check hide ui option
-				$options = get_option('shortcodespro');
+				$options = get_option( 'shortcodespro' );
 
-				if (!isset($options['hide-ui']) OR $options['hide-ui'] != "yes") 
-				add_action('admin_head', array(&$this, 'custom_plugin_header'));
-				
+				if ( ! isset( $options['hide-ui'] ) OR $options['hide-ui'] != "yes" ) 
+				add_action( 'admin_head', array( &$this, 'custom_plugin_header' ) );
 				
 				// TINY MCE BUTTONS
-				if ( current_user_can('edit_posts') && 
-					 current_user_can('edit_pages') && 
-					 get_user_option('rich_editing') == 'true' )
+				if ( current_user_can( 'edit_posts' ) && 
+					 current_user_can( 'edit_pages' ) && 
+					 get_user_option( 'rich_editing' ) == 'true' )
 				{
 					// Add all new buttons
-					add_filter('mce_external_plugins', array(&$this, 'add_plugins'));
+					add_filter( 'mce_external_plugins', array( &$this, 'add_plugins' ) );
 					
 					// Register buttons on correct row
-					add_filter('mce_buttons',   array(&$this, 'register_buttons'),9999);
-					add_filter('mce_buttons_2', array(&$this, 'register_buttons'),9999);
-					add_filter('mce_buttons_3', array(&$this, 'register_buttons'),9999);
-					add_filter('mce_buttons_4', array(&$this, 'register_buttons'),9999);
+					add_filter( 'mce_buttons',   array( &$this, 'register_buttons' ), 9999 );
+					add_filter( 'mce_buttons_2', array( &$this, 'register_buttons' ), 9999 );
+					add_filter( 'mce_buttons_3', array( &$this, 'register_buttons' ), 9999 );
+					add_filter( 'mce_buttons_4', array( &$this, 'register_buttons' ), 9999 );
 					
 					// Regresh TinyMCE version
-					add_filter('tiny_mce_version', array(&$this, 'refresh_mce_version'));
+					add_filter( 'tiny_mce_version', array( &$this, 'refresh_mce_version' ) );
 					
 					// Do the quicktags babe'
-					if ($this->is_edit_page())
-						add_action('admin_footer', array(&$this,'generate_quicktags'));
+					if ( $this->is_edit_page() ) {
+						if ( version_compare( get_bloginfo( 'version' ), '3.3' ) >= 0 )
+							add_action('admin_print_footer_scripts', array( &$this, 'generate_quicktags_33' ) );
+						else
+							add_action( 'admin_footer', array( &$this, 'generate_quicktags' ) );
+						
+					}
 				}
-				
-				
 
 			} 
 			
+		}
+		
+		/** 
+		* Add Thumbnail Support 
+		* 
+		* @package Shortcodes Pro
+		* @subpackage Main Class
+		* @since 1.1.0
+		*
+		*/
+		
+		function add_thumbnail_support() {
+			if ( function_exists( 'add_theme_support' ) ) 
+			add_theme_support( 'post-thumbnails' );
 		}
 
 		/** 
@@ -76,15 +99,15 @@ if ( !class_exists('MV_Shortcodes_Pro') )
 			
 			$current_user = wp_get_current_user();
 			
-			if($current_user->admin_color == 'classic')
+			if( $current_user->admin_color == 'classic' )
 				$pos = 65;
 			else
 				$pos = 33;
 				
 			?>
 			<style type="text/css" media="screen">
-				body #adminmenu #menu-posts-shortcodepro .wp-menu-image {background:transparent url("<?php echo MV_SHORTCODES_PRO_URL.'/img/shortcodespro.png';?>") no-repeat 7px -<?php echo $pos; ?>px;}
-				body #adminmenu #menu-posts-shortcodepro:hover .wp-menu-image, body #adminmenu #menu-posts-shortcodepro.wp-has-current-submenu .wp-menu-image{background:transparent url("<?php echo MV_SHORTCODES_PRO_URL.'/img/shortcodespro.png';?>") no-repeat 7px -1px;}	
+				body #adminmenu #menu-posts-shortcodepro .wp-menu-image {background:transparent url( "<?php echo MV_SHORTCODES_PRO_URL.'/img/shortcodespro.png';?>" ) no-repeat 7px -<?php echo $pos; ?>px;}
+				body #adminmenu #menu-posts-shortcodepro:hover .wp-menu-image, body #adminmenu #menu-posts-shortcodepro.wp-has-current-submenu .wp-menu-image{background:transparent url( "<?php echo MV_SHORTCODES_PRO_URL.'/img/shortcodespro.png';?>" ) no-repeat 7px -1px;}	
 			</style>
 			<?php
 		}
@@ -103,42 +126,42 @@ if ( !class_exists('MV_Shortcodes_Pro') )
 		function get_buttons_by_row()
 		{
 			
-			$buttons = get_transient('sp.get.buttons.main');
+			$buttons = get_transient( 'sp.get.buttons.main' );
 			
-			if ($buttons == "" OR empty($buttons)) 
+			if ( $buttons == "" OR empty( $buttons ) ) 
 			{
 				
-				for ($i=1; $i < 5; $i++) 
+				for ( $i=1; $i < 5; $i++ ) 
 				{ 
-						$args = array(
-							'post_type' => 'shortcodepro',
-							'posts_per_page' => -1,
-							'post_status' => 'publish',
-							'meta_query' => array(
-								array(
-									'key' => 'button',
-									'value' => 'on',
-								),
-								array(
-									'key' => 'row',
-									'value' => 'row-'.$i,
-								)
-							),
-							'orderby' => 'menu_order',
-							'order'	=> 'ASC',
+						$args = array( 
+							'post_type' => 'shortcodepro', 
+							'posts_per_page' => -1, 
+							'post_status' => 'publish', 
+							'meta_query' => array( 
+								array( 
+									'key' => 'button', 
+									'value' => 'on', 
+								 ), 
+								array( 
+									'key' => 'row', 
+									'value' => 'row-'.$i, 
+								 )
+							 ), 
+							'orderby' => 'menu_order', 
+							'order'	=> 'ASC', 
 						 );
 
 
 						$results =  new WP_Query( $args );
 						
-						if (is_object($results))
+						if ( is_object( $results ) )
 						{
 							while ( $results->have_posts() ) : $results->the_post();
 								
-								$sep_after = get_post_meta($results->post->ID,'sep_after',true);
+								$sep_after = get_post_meta( $results->post->ID, 'sep_after', true );
 								
-								if ( isset($sep_after) && $sep_after == 'yes' )
-								$buttons['row-'.$i][] = array($results->post->post_name);
+								if ( isset( $sep_after ) && $sep_after == 'yes' )
+								$buttons['row-'.$i][] = array( $results->post->post_name );
 								else
 								$buttons['row-'.$i][] = $results->post->post_name;
 						
@@ -147,7 +170,7 @@ if ( !class_exists('MV_Shortcodes_Pro') )
 
 				}
 				
-				set_transient('sp.get.buttons.main',$buttons,MV_SHORTCODES_PRO_TRANSIENT_EXPIRE); 
+				set_transient( 'sp.get.buttons.main', $buttons ); 
 			
 			}
 
@@ -166,12 +189,12 @@ if ( !class_exists('MV_Shortcodes_Pro') )
 		*
 		*/
 		
-		function register_buttons($buttons) 
+		function register_buttons( $buttons ) 
 		{  
 			
 			$filter = current_filter();
 					
-			switch ($filter) 
+			switch ( $filter ) 
 			{
 				
 				case 'mce_buttons_2':
@@ -191,24 +214,24 @@ if ( !class_exists('MV_Shortcodes_Pro') )
 				break;
 			}
 									
-			if (isset($this->buttons_by_row[$row]) && !empty($this->buttons_by_row[$row])) 
+			if ( isset( $this->buttons_by_row[$row] ) && ! empty( $this->buttons_by_row[$row] ) ) 
 			{
 				if ( $row != 'row-3' && $row != 'row-4' )
-				array_push($buttons, 'separator');
+				array_push( $buttons, 'separator' );
 
-				foreach ($this->buttons_by_row[$row] as $button)
+				foreach ( $this->buttons_by_row[$row] as $button )
 				{
 
-					if (is_array($button)) 
+					if ( is_array( $button ) ) 
 					{
-						$safe_slug = $this->safe_slug($button[0]);
-						array_push($buttons, $safe_slug);
-						array_push($buttons, 'separator');
+						$safe_slug = $this->safe_slug( $button[0] );
+						array_push( $buttons, $safe_slug );
+						array_push( $buttons, 'separator' );
 					} 
 					else 
 					{
-						$safe_slug = $this->safe_slug($button);
-						array_push($buttons, $safe_slug);
+						$safe_slug = $this->safe_slug( $button );
+						array_push( $buttons, $safe_slug );
 					}
 
 				}
@@ -230,21 +253,21 @@ if ( !class_exists('MV_Shortcodes_Pro') )
 		*
 		*/
 		
-		function add_plugins($plugin_array) 
+		function add_plugins( $plugin_array ) 
 		{
-			if (isset($this->buttons_by_row) && !empty($this->buttons_by_row)) 
+			if ( isset( $this->buttons_by_row ) && ! empty( $this->buttons_by_row ) ) 
 			{				
-				foreach ($this->buttons_by_row as $row)
+				foreach ( $this->buttons_by_row as $row )
 				{
-					foreach ($row as $buttons) 
+					foreach ( $row as $buttons ) 
 					{
-						if (is_array($buttons))
+						if ( is_array( $buttons ) )
 						$button_name = $buttons[0];	
 						else
 						$button_name = $buttons;	
 			
-						$safe_slug = str_replace('-','',$button_name);
-						$plugin_array[$safe_slug] = plugins_url(MV_SHORTCODES_PRO_FOLDER.'/inc/shortcodespro-edit-js.php');
+						$safe_slug = str_replace( '-', '', $button_name );
+						$plugin_array[$safe_slug] = plugins_url( MV_SHORTCODES_PRO_FOLDER.'/inc/shortcodespro-edit-js.php' );
 					}
 				} 			
 			}
@@ -264,7 +287,7 @@ if ( !class_exists('MV_Shortcodes_Pro') )
 		*
 		*/
 		
-		function refresh_mce_version($ver) 
+		function refresh_mce_version( $ver ) 
 		{
 		  ++$ver;
 		  return $ver;
@@ -283,17 +306,70 @@ if ( !class_exists('MV_Shortcodes_Pro') )
 		
 		function is_edit_page()
 		{
-			if ( strpos($_SERVER['REQUEST_URI'], 'post.php')
-			|| strpos($_SERVER['REQUEST_URI'], 'post-new.php')
-			|| strpos($_SERVER['REQUEST_URI'], 'page-new.php')
-			|| strpos($_SERVER['REQUEST_URI'], 'page.php'))
+			if ( strpos( $_SERVER['REQUEST_URI'], 'post.php' )
+			|| strpos( $_SERVER['REQUEST_URI'], 'post-new.php' )
+			|| strpos( $_SERVER['REQUEST_URI'], 'page-new.php' )
+			|| strpos( $_SERVER['REQUEST_URI'], 'page.php' ) )
 			return true;
 
 			return false;
 		}
 		
+		/**
+		* Process Quicktags for 3.3 upwards.
+		* 
+		* Return quicktags JS. 
+		*
+		* @package Shortcodes Pro
+		* @subpackage Base Class
+		* @since 1.1.0
+		*
+		*/
+		
+		function generate_quicktags_33()
+		{
+			
+			$out = get_transient( 'sp.get.quicktags.main.33' );
+			
+			if ( $out == "" )
+			{
+			
+				$buttons = $this->get_quicktag_buttons();
+			
+				if ( ! isset( $buttons ) OR empty( $buttons ) )
+				return;
+			
+				$out  = '
+					<script type="text/javascript">
+					/* <![CDATA[ */'."\n";
+			   				
+				foreach ( $buttons as $shortcode ) 
+				{
+					$shortcode_type = get_post_meta( $shortcode->ID, 'type', true );
+					$shortcode_quicktag = get_post_meta( $shortcode->ID, 'quicktag', true );
+				
+					if ( $shortcode_type == "wrap-content-with" AND $shortcode_quicktag == "on" )
+					{
+					
+						$shortcode_desc   = get_post_meta( $shortcode->ID, 'desc', true );
+						$out .= "QTags.addButton( '".$shortcode->post_name."', '".$shortcode->post_title."', '[do action=\"".$shortcode->post_name."\"]', '[/do]', '','".$shortcode_desc."' );";
+					}
+				
+				}
+	
+				$out .=	'/* ]]> */
+					</script>'."\n\n";
+	
+				set_transient( 'sp.get.quicktags.main', $out );	
+		
+			}
+	
+			echo $out;
+
+		}
+		
 		/** 
-		* Process Quicktags 
+		* Process Quicktags for 3.2 downwards.
 		* 
 		* Return quicktags JS. 
 		*
@@ -306,14 +382,14 @@ if ( !class_exists('MV_Shortcodes_Pro') )
 		function generate_quicktags()
 		{
 			
-			$out = get_transient('sp.get.quicktags.main');
+			$out = get_transient( 'sp.get.quicktags.main' );
 			
-			if ( $out == "")
+			if ( $out == "" )
 			{
 			
 				$buttons = $this->get_quicktag_buttons();
 			
-				if (!isset($buttons) OR empty($buttons))
+				if ( ! isset( $buttons ) OR empty( $buttons ) )
 				return;
 			
 				$out  = '
@@ -321,18 +397,17 @@ if ( !class_exists('MV_Shortcodes_Pro') )
 					/* <![CDATA[ */'."\n";
 			   
 				$out .='
-						if ( wpQuickTagsToolbar = document.getElementById("ed_toolbar") ) 
-						{'."\n";
+						if ( wpQuickTagsToolbar = document.getElementById("ed_toolbar") ) {'."\n";
 					
-				foreach ($buttons as $shortcode) 
+				foreach ( $buttons as $shortcode ) 
 				{
-					$shortcode_type = get_post_meta($shortcode->ID,'type',true);
-					$shortcode_quicktag = get_post_meta($shortcode->ID,'quicktag',true);
+					$shortcode_type = get_post_meta( $shortcode->ID, 'type', true );
+					$shortcode_quicktag = get_post_meta( $shortcode->ID, 'quicktag', true );
 				
 					if ( $shortcode_type == "wrap-content-with" AND $shortcode_quicktag == "on" )
 					{
 					
-						$shortcode_desc   = get_post_meta($shortcode->ID,'desc',true);
+						$shortcode_desc   = get_post_meta( $shortcode->ID, 'desc', true );
 					
 						$out .='
 					
@@ -365,7 +440,7 @@ if ( !class_exists('MV_Shortcodes_Pro') )
 				$out .=	'/* ]]> */
 					</script>'."\n\n";
 			
-				set_transient('sp.get.quicktags.main',$out,MV_SHORTCODES_PRO_TRANSIENT_EXPIRE);	
+				set_transient( 'sp.get.quicktags.main', $out );	
 				
 			}
 			
@@ -399,7 +474,7 @@ if ( !class_exists('MV_Shortcodes_Pro') )
 			AND wposts.post_type = 'shortcodepro' 
 			ORDER BY wposts.menu_order ASC";
 		
-			$results = $wpdb->get_results($querystr, OBJECT);
+			$results = $wpdb->get_results( $querystr, OBJECT );
 						
 			return $results;
 		}
@@ -415,10 +490,12 @@ if ( !class_exists('MV_Shortcodes_Pro') )
 		*
 		*/
 		
-		function safe_slug($button)
+		function safe_slug( $button )
 		{
-			return str_replace('-','',$button);
+			return str_replace( '-', '', $button );
 		}
 
 	}		
 }
+
+new MV_Shortcodes_Pro();

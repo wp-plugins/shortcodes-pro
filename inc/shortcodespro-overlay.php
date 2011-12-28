@@ -7,60 +7,60 @@
 */
 
 // Start WordPress
-require_once('../../../../wp-load.php');
+require_once( '../../../../wp-load.php' );
 
 // Check for Shortcodes Pro
-if (!defined('MV_SHORTCODES_PRO_VERSION')) 
-die('Shortcodes Pro error. Plugin not initialized.');
+if ( ! defined( 'MV_SHORTCODES_PRO_VERSION' ) ) 
+die( __( 'Shortcodes Pro error. Plugin not initialized.', 'shortcodes-pro' ) );
 
 // Check user is logged and with correct permissions.
-if (!is_user_logged_in() OR !current_user_can( 'edit_posts' ) )
-$sp_base->die_error(__('Cheating??. Please verify your settings'));
+if ( ! is_user_logged_in() OR ! current_user_can( 'edit_posts' ) )
+$sp_base->die_error( __( 'Cheating?. Please verify your settings', 'shortcodes-pro' ) );
 
 // Start the base class
 $sp_base = new MV_ShortcodesPro_Base();
 
 // Check to see if shortcode is being passed
-if (!isset($_GET['shortcode']))
-$sp_base->die_error(__('Shortcode not found. Please verify your settings'));
+if ( ! isset( $_GET['shortcode'] ) )
+$sp_base->die_error( __( 'Shortcode not found. Please verify your settings', 'shortcodes-pro' ) );
 
 // Get the shortcode
-$shortcode = $sp_base->get_shortcode(esc_attr($_GET['shortcode']));
+$shortcode = $sp_base->get_shortcode( esc_attr( $_GET['shortcode'] ) );
 
 // Check Shortcode
-if (!$shortcode)
-$sp_base->die_error(__('The Shortcode does not exist. Please verify your settings'));
+if ( ! $shortcode )
+$sp_base->die_error( __( 'The Shortcode does not exist. Please verify your settings', 'shortcodes-pro' ) );
 
 // Get Shortcode data
-$post = get_post($shortcode, OBJECT);
-$options = get_post_custom($post->ID);
+$post = get_post( $shortcode, OBJECT );
+$options = get_post_custom( $post->ID );
 
 // Check Button 
-if (isset($options['button'][0]) && $options['button'][0] != "on")
-$sp_base->die_error(__('Shortcode button not enabled. Please verify this shortcode settings.'));
+if ( isset( $options['button'][0] ) && $options['button'][0] != "on" )
+$sp_base->die_error( __( 'Shortcode button not enabled. Please verify this shortcode settings.', 'shortcodes-pro' ) );
 
 // Parse attributes
-$attributes = $sp_base->get_attributes($options);
-if (count($attributes)<1) 
-$sp_base->die_error(__('Shortcode Error. Please verify this shortcode settings.'));
+$attributes = $sp_base->get_attributes( $options );
+if ( count( $attributes ) < 1 ) 
+$sp_base->die_error( __( 'Shortcode Error. Please verify this shortcode settings.', 'shortcodes-pro' ) );
 
 // Set fields
-$fields = $sp_base->process_attributes($attributes,$options);
+$fields = $sp_base->process_attributes( $attributes, $options );
 
 // Set the title
 $shortcode_title = $post->post_title;
-if (isset($options['desc'][0]) && count($options['desc'][0]) < 15) 
-$shortcode_title .=  ': '.$options['desc'][0];
+if ( isset( $options['desc'][0] ) && count( $options['desc'][0] ) < 15 ) 
+$shortcode_title .=  ': ' . $options['desc'][0];
 	
-?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+?><!DOCTYPE> 
 <html xmlns="http://www.w3.org/1999/xhtml"> 
 <head> 
 <title><?php echo $post->post_title; ?></title>
-<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php echo get_option('blog_charset'); ?>" />
-<script language="javascript" type="text/javascript" src="<?php bloginfo('wpurl') ?>/wp-includes/js/jquery/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="<?php bloginfo('wpurl') ?>/wp-includes/js/tinymce/tiny_mce_popup.js"></script>
-<script language="javascript" type="text/javascript" src="<?php bloginfo('wpurl') ?>/wp-includes/js/tinymce/utils/mctabs.js"></script>
-<script language="javascript" type="text/javascript" src="<?php bloginfo('wpurl') ?>/wp-includes/js/tinymce/utils/form_utils.js"></script>
+<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php echo get_option( 'blog_charset' ); ?>" />
+<script language="javascript" type="text/javascript" src="<?php bloginfo( 'wpurl' ) ?>/wp-includes/js/jquery/jquery.js"></script>
+<script language="javascript" type="text/javascript" src="<?php bloginfo( 'wpurl' ) ?>/wp-includes/js/tinymce/tiny_mce_popup.js"></script>
+<script language="javascript" type="text/javascript" src="<?php bloginfo( 'wpurl' ) ?>/wp-includes/js/tinymce/utils/mctabs.js"></script>
+<script language="javascript" type="text/javascript" src="<?php bloginfo( 'wpurl' ) ?>/wp-includes/js/tinymce/utils/form_utils.js"></script>
 <link rel="stylesheet" href="<?php echo MV_SHORTCODES_PRO_URL ?>/css/shortcodespro-admin.css" type="text/css" media="all"/>
 
 <script type="text/javascript">
@@ -96,16 +96,14 @@ function checkSubmit()
 
 		?>
 		
-		if (selection === "")
-		{
+		if (selection === "") {
 		 shortcodeContent = shortcodeContent+'/]';
 		} else {
 		 selection = selection.replace(/^\s+|\s+$/g, "");
 		 shortcodeContent = shortcodeContent+']'+selection+'[/do]';
 		}
 	
-		if(window.tinyMCE) 
-		{
+		if(window.tinyMCE) {
 			window.tinyMCE.execInstanceCommand('content', 'mceInsertContent', false, shortcodeContent);
 			tinyMCEPopup.editor.execCommand('mceRepaint');
 			tinyMCEPopup.close();
@@ -113,7 +111,7 @@ function checkSubmit()
 		
 	return false;
 }
-});
+} );
 </script>
 </head>
 <body>
@@ -122,12 +120,12 @@ function checkSubmit()
 	$img = "";
 
 	// check button image
-	if (function_exists('has_post_thumbnail'))
+	if ( function_exists( 'has_post_thumbnail' ) )
 	{
-		if (has_post_thumbnail($post->ID)) 
+		if ( has_post_thumbnail( $post->ID ) ) 
 		{
-			$image_url = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID));  
-			if (isset($image_url) && !empty($image_url))
+			$image_url = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ) );  
+			if ( isset( $image_url ) && ! empty( $image_url ) )
 			$img = '<img src="'.$image_url[0].'" alt="'.$post->post_title.'" width="20" height="20" />';
 		}
 	}
@@ -136,23 +134,23 @@ function checkSubmit()
 	echo '<h3 class="media-title">'.$img.' '.$shortcode_title.'</h3>';
 
 	// Check for long description
-	if (isset($options['desclong'][0]) && trim($options['desclong'][0]) != "") 
+	if ( isset( $options['desclong'][0] ) && trim( $options['desclong'][0] ) != "" ) 
 	echo '<p>'.$options['desclong'][0].'</p>'; ?>
 
 <div class="media-form"><form id="shortcode-form" action="#" method="get">
 
 <?php 
 	// Generate the overlay fields
-	$sp_base->do_overfields($fields,true); 
+	$sp_base->do_overfields( $fields, true ); 
 ?>
 
 <div class="mceActionPanel">
 	<div style="float: left">
-		<input type="button" id="cancel" name="cancel" value="<?php echo __('Cancel'); ?>" onclick="tinyMCEPopup.close();" />
+		<input type="button" id="cancel" name="cancel" value="<?php echo __( 'Cancel', 'shortcodes-pro' ); ?>" onclick="tinyMCEPopup.close();" />
 	</div>
 
 	<div style="float: right">
-		<input type="submit" id="insert" name="insert" value="<?php echo __('Insert'); ?>" onclick="checkSubmit();" />
+		<input type="submit" id="insert" name="insert" value="<?php echo __( 'Insert',  'shortcodes-pro'  ); ?>" onclick="checkSubmit();" />
 	</div>
 </div>
 

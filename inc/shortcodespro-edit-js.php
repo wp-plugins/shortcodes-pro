@@ -10,12 +10,12 @@
 header("Content-type: application/x-javascript");
 
 // require wordpress
-require_once('../../../../wp-load.php');
+require_once( '../../../../wp-load.php' );
 
-if (!defined('MV_SHORTCODES_PRO_VERSION')) 
-die(__('Shortcodes Pro error. Could not initialize WordPress',MV_SHORTCODES_PRO_DOMAIN));
+if ( ! defined( 'MV_SHORTCODES_PRO_VERSION' ) ) 
+die( __( 'Shortcodes Pro error. Could not initialize WordPress', 'shortcodes-pro' ) );
 
-$out = get_transient('sp.get.buttons.edit');
+$out = get_transient( 'sp.get.buttons.edit' );
 
 if ( $out == "" ) 
 {
@@ -26,39 +26,39 @@ if ( $out == "" )
 	$shortcodes = $sp_base->get_buttons();
 
 	// check if we have shortcodes
-	if (count($shortcodes) > 0) 
+	if ( count( $shortcodes ) > 0 ) 
 	{
 		// start the output
 		$out =  "(function() {\n";
 
 		// loop trough each shortcode
-		foreach ($shortcodes as $shortcode ) 
+		foreach ( $shortcodes as $shortcode ) 
 		{
 
 			// create shortcode variables
 			$shortcode_title  		= $shortcode->post_title;
-			$shortcode_desc   		= get_post_meta($shortcode->ID,'desc',true);
-			$shortcode_type   		= get_post_meta($shortcode->ID,'type',true);
-			$shortcode_attributes	= get_post_meta($shortcode->ID,'attributes',true);
-			$total_attributes		= get_post_meta($shortcode->ID,'totalattr',true);
-			$shortcode_width_meta 	= get_post_meta($shortcode->ID,'width',true);
-			$shortcode_height_meta 	= get_post_meta($shortcode->ID,'height',true);
-			$shortcode_prevent	    = get_post_meta($shortcode->ID,'prevent',true);
+			$shortcode_desc   		= get_post_meta( $shortcode->ID, 'desc', true );
+			$shortcode_type   		= get_post_meta( $shortcode->ID, 'type', true );
+			$shortcode_attributes	= get_post_meta( $shortcode->ID, 'attributes', true );
+			$total_attributes		= get_post_meta( $shortcode->ID, 'totalattr', true );
+			$shortcode_width_meta 	= get_post_meta( $shortcode->ID, 'width', true );
+			$shortcode_height_meta 	= get_post_meta( $shortcode->ID, 'height', true );
+			$shortcode_prevent	    = get_post_meta( $shortcode->ID, 'prevent', true );
 			
 			// create button title
 			$button_title = ( $shortcode_desc ) ? $shortcode_title.': '.$shortcode_desc : $shortcode_title;
 
 			// Verify shortcode with/height dimensions
-			$shortcode_width  = ( (int)$shortcode_width_meta > 490 ) ? $shortcode_width_meta : 490;
-			$shortcode_height = ( (int)$shortcode_height_meta > 300 ) ? $shortcode_height_meta : 300;
+			$shortcode_width  = ( ( int )$shortcode_width_meta > 490 ) ? $shortcode_width_meta : 490;
+			$shortcode_height = ( ( int )$shortcode_height_meta > 300 ) ? $shortcode_height_meta : 300;
 
 			// remove slashes from the slug
-			$safe_slug = str_replace('-','',$shortcode->post_name);
+			$safe_slug = str_replace( '-', '', $shortcode->post_name );
 
 			// verify the overlay is needed
-			if ($shortcode_type == 'insert-custom-code') 
+			if ( $shortcode_type == 'insert-custom-code' ) 
 			{
-				if ( $total_attributes == null OR (int)$total_attributes == 0 OR $shortcode_attributes != "on" )
+				if ( $total_attributes == null OR ( int )$total_attributes == 0 OR $shortcode_attributes != "on" )
 				$shortcode_type = 'default';
 			}
 			
@@ -68,17 +68,17 @@ if ( $out == "" )
 					title : '".$button_title."',\n";
 
 			// check button image
-			if ( function_exists('has_post_thumbnail') )
+			if ( function_exists( 'has_post_thumbnail' ) )
 			{
-				if (has_post_thumbnail($shortcode->ID)) 
+				if ( has_post_thumbnail( $shortcode->ID ) ) 
 				{
-					$image_url = wp_get_attachment_image_src(get_post_thumbnail_id($shortcode->ID));  
-					$out .= "image : '".$image_url[0]."',";
+					$image_url = wp_get_attachment_image_src( get_post_thumbnail_id( $shortcode->ID ) );  
+					$out .= "image : '".$image_url[0]."', ";
 				}
 			}
 
 			// generate shortcode button behavior 
-			switch ($shortcode_type) 
+			switch ( $shortcode_type ) 
 			{
 				//	INSERT CUSTOM CODE
 				case 'insert-custom-code':
@@ -88,13 +88,12 @@ if ( $out == "" )
 						var sel = ed.selection.getContent({format : 'raw'});";
 											
 					// check if empty prevent is on
-					if ($shortcode_prevent == "on")
+					if ( $shortcode_prevent == "on" )
 					{
 						$out .= "
 
-							if ( sel.length == 0  ) 
-							{
-								alert('".__('Please make a selection.', MV_SHORTCODES_PRO_DOMAIN)."');
+							if ( sel.length == 0  ) {
+								alert('".__('Please make a selection.', 'shortcodes-pro')."');
 								return;
 							}";
 					}
@@ -129,13 +128,12 @@ if ( $out == "" )
 						sel = sel.replace(/^\s+|\s+$/g, '');";
 						
 					// check if empty prevent is on
-					if ($shortcode_prevent == "on")
+					if ( $shortcode_prevent == "on" )
 					{
 						$out .= "
 
-							if ( sel.length == 0  ) 
-							{
-								alert('".__('Please make a selection.', MV_SHORTCODES_PRO_DOMAIN)."');
+							if ( sel.length == 0  ) {
+								alert('".__('Please make a selection.', 'shortcodes-pro')."');
 								return;
 							}";
 					}
@@ -143,14 +141,12 @@ if ( $out == "" )
 					//Return normal shortcode
 					$out .= "	
 					
-						if ( sel.length > 0  ) 
-						{
+						if ( sel.length > 0  ) {
 							// content 
 							var content = '[do action=\"".$shortcode->post_name."\"]' + sel + '[/do]';
 							ed.execCommand('mceReplaceContent', false, content);
 						} 
-						else 
-						{
+						else {
 							// no content
 							var content = '[do action=\"".$shortcode->post_name."\"/]';
 							ed.execCommand('mceReplaceContent', false, content);
@@ -176,7 +172,7 @@ if ( $out == "" )
 			            return {
 			                longname : '".$shortcode_title."',
 			                author : 'Shortcodes Pro',
-			                authorurl : '".get_bloginfo('url')."',
+			                authorurl : '".get_bloginfo( 'url' )."',
 			                infourl : 'http://www.mattvarone.com',
 			                version : '".MV_SHORTCODES_PRO_VERSION."'
 			            };
@@ -189,10 +185,10 @@ if ( $out == "" )
 		$out .= "})();";
 				
 		// SAVE CACHE
-		set_transient('sp.get.buttons.edit',$out,3600);
+		set_transient( 'sp.get.buttons.edit', $out, 3600 );
 		
 		// echo the js content
-		if ($out != "") echo $out;
+		if ( $out != "" ) echo $out;
 		
 	}
 } else {
