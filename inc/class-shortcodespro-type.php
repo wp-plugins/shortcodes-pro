@@ -20,7 +20,7 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 	
 		function __construct()
 		{
-			add_action('init', array( &$this, 'init' ) );
+			add_action( 'init', array( &$this, 'init' ) );
 		}
 			
 		function init()
@@ -422,7 +422,7 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 					'<a href="http://lab.mattvarone.com/plugins/shortcodes-pro/docs" target="_blank">'.__( 'Documentation', 'shortcodes-pro' ).'</a><br/>'.
 					'<a href="http://twitter.com/sksmatt" target="_blank">'.__( 'Updates', 'shortcodes-pro' ).'</a></p>'.
 					'<p><small>'.__( 'Version Installed:', 'shortcodes-pro' ).' <strong>'.MV_SHORTCODES_PRO_VERSION.'</strong>.</small> '.
-					'<small>'.__( 'Brought to you by', 'shortcodes-pro' ).' <a href="http://mattvarone.com" title="Matt Varone" target="_blank">Matt Varone</a>  | <a href="http://www.mattvarone.com/donate" title="Tea for Matt!" target="_blank"><strong>'.__( 'Donate', 'shortcodes-pro' ).'</strong></a> &hearts;.</small></p>';
+					'<small>'.__( 'Brought to you by', 'shortcodes-pro' ).' <a href="http://mattvarone.com" title="Matt Varone" target="_blank">Matt Varone</a>  | <a href="http://www.mattvarone.com/donate" title="Tea for Matt! " target="_blank"><strong>'.__( 'Donate', 'shortcodes-pro' ).'</strong></a> &hearts;.</small></p>';
 			}
 
 			return $contextual_help;
@@ -680,7 +680,7 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 				$this->set_attributes_fields();
 
 				?>
-				 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+				 <! DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 				<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US"> 
 				<head> 
 				<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
@@ -688,35 +688,35 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 				</head>
 				<body>
 					<style type="text/css" media="screen">
-						#media-items h3 { font-family: Georgia,"Times New Roman",Times,serif;font-weight: normal;color: #5A5A5A; font-size:1.6em}
+						#media-items h3 { font-family: Georgia, "Times New Roman", Times, serif;font-weight: normal;color: #5A5A5A; font-size:1.6em}
 						#media-items {border-width: 1px;border-style: solid; padding:15px;border-color: #DFDFDF;}
 						#media-items th, #media-items label {font-weight:bold}
 						#media-items .desc { font-style: italic; color:#333; font-size:12px}
 						#media-items .button.add_attribute { margin-left:10px;}
-						#video-form,#media-items { overflow:hidden;}
+						#video-form, #media-items { overflow:hidden;}
 						#errors { color:red;font-weight:bold;}
 						.sscatt_options { display:none;}
 						#sphelp {padding: 15px;width: 90%;background: #f4f4f4;border: 1px dotted #ddd;font-style: normal;}
 					</style>
 
 					<script type="text/javascript" charset="utf-8">
-					jQuery(function() {
+					jQuery( function() {
 							
-							jQuery('#TB_ajaxContent').css('height','97%');
+							jQuery( '#TB_ajaxContent' ).css( 'height', '97%' );
 
-							var selected = jQuery('#att_type').val();
+							var selected = jQuery( '#att_type' ).val();
 
-							filterOverlay(selected);
+							filterOverlay( selected );
 							
-							function filterOverlay(selection) {
-								if(selection=="select") {
-									jQuery('.sscatt_options').show();
+							function filterOverlay( selection ) {
+								if( selection=="select" ) {
+									jQuery( '.sscatt_options' ).show();
 								} else {
-									jQuery('.sscatt_options').hide();
+									jQuery( '.sscatt_options' ).hide();
 								}
 							}
 
-					});
+					} );
 					</script>
 					<h3 class="media-title"><?php _e( 'New Attribute Details', 'shortcodes-pro' ) ?></h3> 
 					<form enctype="multipart/form-data" method="post" action="#" class="media-upload-form type-form validate" id="video-form"> 
@@ -764,7 +764,7 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 			$attr_id = esc_attr( $_GET['id'] );
 		
 			?>
-			 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+			 <! DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 			<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US"> 
 			<head> 
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
@@ -773,7 +773,7 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 			<body>
 				
 			<style type="text/css" media="screen">
-				#media-items h3 { font-family: Georgia,"Times New Roman",Times,serif;font-weight: normal;color: #5A5A5A; font-size:1.6em}
+				#media-items h3 { font-family: Georgia, "Times New Roman", Times, serif;font-weight: normal;color: #5A5A5A; font-size:1.6em}
 				#media-items {border-width: 1px;border-style: solid; padding:15px;border-color: #DFDFDF;}
 				#media-items th, #media-items label {font-weight:bold}
 				#media-items .desc { font-style: italic; color:#333; font-size:12px}
@@ -784,37 +784,37 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 			</style>
 		
 			<script type="text/javascript" charset="utf-8">
-				jQuery(function() {
+				jQuery( function() {
 					
-					jQuery('#TB_ajaxContent').css('height','97%');
+					jQuery( '#TB_ajaxContent' ).css( 'height', '97%' );
 				
 					var slug = '<?php echo $attr_id; ?>';
-					var label = jQuery('#att_label_'+slug).val();
-					var desc = jQuery('#att_desc_'+slug).val();
-					var type = jQuery('#att_type_'+slug).val();
-					var value = jQuery('#att_value_'+slug).val();
-					var options = jQuery('#att_options_'+slug).val();
+					var label = jQuery( '#att_label_'+slug ).val();
+					var desc = jQuery( '#att_desc_'+slug ).val();
+					var type = jQuery( '#att_type_'+slug ).val();
+					var value = jQuery( '#att_value_'+slug ).val();
+					var options = jQuery( '#att_options_'+slug ).val();
 				
-					jQuery('#att_name').val(slug).attr('disabled','disabled');
-					jQuery('#att_value').val(value);
-					jQuery('#att_options').val(options);
-					jQuery('#att_label').val(label);
-					jQuery('#att_type').val(type);
-					jQuery('#att_desc').val(desc);
+					jQuery( '#att_name' ).val( slug ).attr( 'disabled', 'disabled' );
+					jQuery( '#att_value' ).val( value );
+					jQuery( '#att_options' ).val( options );
+					jQuery( '#att_label' ).val( label );
+					jQuery( '#att_type' ).val( type );
+					jQuery( '#att_desc' ).val( desc );
 					
-					var selected = jQuery('#att_type').val();
+					var selected = jQuery( '#att_type' ).val();
 										
-					filterOverlay(selected);
+					filterOverlay( selected );
 										
-					function filterOverlay(selection) {
-						if(selection=="select") {
-							jQuery('.sscatt_options').show();
+					function filterOverlay( selection ) {
+						if( selection=="select" ) {
+							jQuery( '.sscatt_options' ).show();
 						} else {
-							jQuery('.sscatt_options').hide();
+							jQuery( '.sscatt_options' ).hide();
 						}
 					}
 
-				});
+				} );
 			</script>
 
 			
@@ -894,9 +894,9 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 					'type'=>'select', 
 					'std' => 'wrap-content-with', 
 					'options' => array( 
-						'wrap-content-with' =>  __( 'Wrap content with', 'shortcodes-pro' ), 
-						'insert-custom-code' => __( 'Insert custom code', 'shortcodes-pro' )
-					)), 
+						array( 'id'=> 'wrap-content-with', 'title' =>  __( 'Wrap content with', 'shortcodes-pro' ) ), 
+						array( 'id'=> 'insert-custom-code', 'title' => __( 'Insert custom code', 'shortcodes-pro' ) )
+					 ) ), 
 						
 					array( 
 					'name' => __( 'Attributes', 'shortcodes-pro' ), 
@@ -995,7 +995,7 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 					'id' => 'insert-html', 
 					'type'=>'textarea', 
 					'std' => ''
-					 ),
+					 ), 
 		
 					array( 
 					'name' => __( 'Code', 'shortcodes-pro' ), 
@@ -1040,8 +1040,8 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 						'row-1' =>  __( 'Row 1', 'shortcodes-pro' ), 
 						'row-2' =>  __( 'Row 2', 'shortcodes-pro' ), 
 						'row-3' =>  __( 'Row 3', 'shortcodes-pro' ), 
-						'row-4' =>  __( 'Row 4', 'shortcodes-pro' ),
-					), 
+						'row-4' =>  __( 'Row 4', 'shortcodes-pro' ), 
+					 ), 
 					'std' => 'row-1' ), 
 		
 					array( 

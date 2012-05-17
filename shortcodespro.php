@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Shortcodes Pro 
-Version: 1.1.0
+Version: 1.1.0.1
 Plugin URI: http://www.mattvarone.com/featured-content/shortcodes-pro/
 Description: Quick and easy creation of WordPress shortcodes and TinyMCE rich editor buttons from the comfort of the WordPress interface.
 Author: Matt Varone
@@ -40,7 +40,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 define( 'MV_SHORTCODES_PRO_BASENAME', plugin_basename( __FILE__ ) );
 define( 'MV_SHORTCODES_PRO_URL', plugins_url( '', __FILE__ ) );
 define( 'MV_SHORTCODES_PRO_PATH', plugin_dir_path( __FILE__ ) );
-define( 'MV_SHORTCODES_PRO_VERSION', '1.1.0' );
+define( 'MV_SHORTCODES_PRO_VERSION', '1.1.0.1' );
 define( 'MV_SHORTCODES_PRO_FOLDER', '/' . basename( dirname( __FILE__ ) ) );
 /*
 |--------------------------------------------------------------------------
