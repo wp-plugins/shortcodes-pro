@@ -24,8 +24,12 @@ Shortcodes Pro allows quick and easy creation of WordPress shortcodes and TinyMC
 * Translated in: French and Spanish.
 * Well Documented.
 
+
 More info and complete documentation at:  
 http://www.mattvarone.com/featured-content/shortcodes-pro/
+
+
+Would you like to help translate the plugin into more langauges? [Contact Matt](http://www.mattvarone.com/contact/ "Contact Matt").
 
 == Installation ==
 
