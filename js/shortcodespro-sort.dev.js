@@ -4,7 +4,7 @@
 * @package Shortcodes Pro
 * @author Matt Varone
 */
-
+var mv_shortcodespro_sort_js_params;
 jQuery(document).ready(function($) {
     var shortcodesRows = $(".target-row");
     shortcodesRows.each(function () {
@@ -34,7 +34,7 @@ jQuery(document).ready(function($) {
                     return;
                 },
                 error: function (xhr, textStatus, e) {
-                    alert("There was an error saving the updates: " + e);
+                    alert(mv_shortcodespro_sort_js_params.in_error + e);
                     loading.hide();
                     return;
                 }

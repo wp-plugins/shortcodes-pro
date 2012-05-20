@@ -1,9 +1,10 @@
 /**
  * Shortcodes Pro Admin JS
  *
- * @package Shortcodes Pro
- * @author Matt Varone
+ * @package  Shortcodes Pro
+ * @author   Matt Varone
  */
+var mv_shortcodespro_js_params;
 jQuery(function () {
     var scp_class = ".shortcodespro-meta-box ",
         elements = [],
@@ -88,7 +89,7 @@ jQuery(function () {
         tb_remove()
     });
     jQuery(".button.delete").live("click", function () {
-        var answer = confirm("Delete this attribute?");
+        var answer = confirm(mv_shortcodespro_js_params.in_delete_confirmation);
         if (answer) {
             var row = jQuery(this).parent().parent(),
                 slug = row.prop("id").replace("row_", ""),
@@ -99,14 +100,14 @@ jQuery(function () {
                 c = parseFloat(total) - 1;
             jQuery("#totalattr").val(c);
             row.remove();
-            filterAttributesTitle()
+            filterAttributesTitle();
         } else {
-            return false
+            return false;
         }
     });
-    jQuery("#att_type").live("change", function () {
+    jQuery("#att_type").on("change", function () {
         var selected = jQuery(this).val();
-        filterOverlay(selected)
+        filterOverlay(selected);
     });
 
     function filterElements(behaviour) {
@@ -115,19 +116,19 @@ jQuery(function () {
             jQuery(".sscquicktag").show();
             jQuery(attributes_row).stop().fadeTo(50, 0.5, function () {
                 jQuery(attributes_id).removeAttr("checked").prop("disabled", "disabled");
-                jQuery(".sscdesclong,.sscwidth,.sscheight").hide()
+                jQuery(".sscdesclong,.sscwidth,.sscheight").hide();
             })
         } else {
             jQuery(".sscquicktag").hide();
             jQuery(attributes_row).stop().fadeTo(50, 1, function () {
-                jQuery(attributes_id).removeAttr("disabled")
+                jQuery(attributes_id).removeAttr("disabled");
             })
         }
         jQuery.each(elements, function (index, value) {
             if (value === behaviour) {
-                jQuery("#" + value).show()
+                jQuery("#" + value).show();
             } else {
-                jQuery("#" + value).hide()
+                jQuery("#" + value).hide();
             }
         })
     }
@@ -135,9 +136,9 @@ jQuery(function () {
     function FormatNumberLength(num, length) {
         var r = "" + num;
         while (r.length < length) {
-            r = "0" + r
+            r = "0" + r;
         }
-        return r
+        return r;
     }
 
     function filterAttributes() {
@@ -145,13 +146,13 @@ jQuery(function () {
         if (status === true) {
             jQuery(attributes_box).show();
             if (jQuery("#button").is(":checked")) {
-                jQuery(".sscdesclong,.sscwidth,.sscheight").show()
+                jQuery(".sscdesclong,.sscwidth,.sscheight").show();
             }
             filterDesc(true)
         } else {
             jQuery(attributes_box).hide();
             jQuery(".sscdesclong,.sscwidth,.sscheight").hide();
-            filterDesc()
+            filterDesc();
         }
     }
 
@@ -162,14 +163,14 @@ jQuery(function () {
             jQuery(".sscinsert-php").show();
             jQuery(".sscinsert-css,.sscinsert-html").hide();
             if (jQuery("#button").is(":checked")) {
-                jQuery(".sscexecute").show()
+                jQuery(".sscexecute").show();
             }
             break;
         case "html":
             jQuery(".sscinsert-html").show();
             jQuery(".sscinsert-css,.sscinsert-php").hide();
             if (jQuery("#button").is(":checked")) {
-                jQuery(".sscexecute").show()
+                jQuery(".sscexecute").show();
             }
             break;
         case "css":
@@ -179,9 +180,9 @@ jQuery(function () {
             break
         }
         if (showAttributes === true) {
-            jQuery(scp_class + ".attributes-desc").show()
+            jQuery(scp_class + ".attributes-desc").show();
         } else {
-            jQuery(scp_class + ".attributes-desc").hide()
+            jQuery(scp_class + ".attributes-desc").hide();
         }
     }
 
@@ -189,9 +190,9 @@ jQuery(function () {
         var titles = jQuery(".scp-attributes-header"),
             total = jQuery("#totalattr").val();
         if (total > 0) {
-            titles.show()
+            titles.show();
         } else {
-            titles.hide()
+            titles.hide();
         }
     }
 
@@ -200,20 +201,20 @@ jQuery(function () {
             fields_atr = fields + ",.sscdesc,.sscdesclong,.sscwidth,.sscheight";
         if (jQuery("#button").is(":checked")) {
             if (jQuery("#attributes").is(":checked")) {
-                jQuery(fields_atr).show()
+                jQuery(fields_atr).show();
             } else {
-                jQuery(fields).show()
+                jQuery(fields).show();
             }
         } else {
-            jQuery(fields_atr).hide()
+            jQuery(fields_atr).hide();
         }
     }
 
     function filterOverlay(selection) {
         if (selection === "select") {
-            jQuery(".sscatt_options").show()
+            jQuery(".sscatt_options").show();
         } else {
-            jQuery(".sscatt_options").hide()
+            jQuery(".sscatt_options").hide();
         }
     }
 
@@ -233,21 +234,21 @@ jQuery(function () {
             c = parseFloat(total) + 1,
             l = parseFloat(last) + 1,
             hidden = '<input type="hidden" name="att_desc_' + attribute.slug + '" value="' + attribute.desc + '" id="att_desc_' + attribute.slug + '"/><input type="hidden" name="att_type_' + attribute.slug + '" value="' + attribute.type + '" id="att_type_' + attribute.slug + '"/><input type="hidden" name="att_value_' + attribute.slug + '" value="' + attribute.value + '" id="att_value_' + attribute.slug + '"/><input type="hidden" name="att_options_' + attribute.slug + '" value="' + attribute.options + '" id="att_options_' + attribute.slug + '"/>',
-            prepend = '<tr class="sscrow" id="row_' + attribute.slug + '"><td width="25%"><input type="text" name="att_order_' + attribute.slug + '" id="att_order_' + attribute.slug + '" value="' + l + '" size="4" ></td><td width="25%"><input type="text" name="att_slug_' + attribute.slug + '" id="att_slug_' + attribute.slug + '" value="' + attribute.slug + '"readonly="readonly"></td><td width="25%"><input type="text" name="att_label_' + attribute.slug + '" id="att_label_' + attribute.slug + '" value="' + attribute.label + '"readonly="readonly"></td><td width="25%"><a title="Edit Attribute" class="edit button thickbox" href="admin-ajax.php?action=scpeditattribute&width=640&id=' + attribute.slug + '">Edit</a> <a title="Delete Attribute" class="delete button" href="#">Delete</a>' + hidden + "</td></tr>";
+            prepend = '<tr class="sscrow" id="row_' + attribute.slug + '"><td width="25%"><input type="text" name="att_order_' + attribute.slug + '" id="att_order_' + attribute.slug + '" value="' + l + '" size="4" ></td><td width="25%"><input type="text" name="att_slug_' + attribute.slug + '" id="att_slug_' + attribute.slug + '" value="' + attribute.slug + '"readonly="readonly"></td><td width="25%"><input type="text" name="att_label_' + attribute.slug + '" id="att_label_' + attribute.slug + '" value="' + attribute.label + '"readonly="readonly"></td><td width="25%"><a class="edit button thickbox" href="admin-ajax.php?action=scpeditattribute&width=640&id=' + attribute.slug + '">'+mv_shortcodespro_js_params.in_edit+'</a> <a class="delete button" href="#">'+ mv_shortcodespro_js_params.in_delete+'</a>' + hidden + "</td></tr>";
         jQuery(".sscadd-new-attributed").before(prepend);
         jQuery("#totalattr").val(c);
         jQuery("#lastattr").val(l);
-        jQuery("#attrvals").val(attributes + "|%" + attribute.slug + "%")
+        jQuery("#attrvals").val(attributes + "|%" + attribute.slug + "%");
     }
 
     function updateAttribute(attribute, row, order) {
         var hidden = '<input type="hidden" name="att_desc_' + attribute.slug + '" value="' + attribute.desc + '" id="att_desc_' + attribute.slug + '"/><input type="hidden" name="att_type_' + attribute.slug + '" value="' + attribute.type + '" id="att_type_' + attribute.slug + '"/><input type="hidden" name="att_value_' + attribute.slug + '" value="' + attribute.value + '" id="att_value_' + attribute.slug + '"/><input type="hidden" name="att_options_' + attribute.slug + '" value="' + attribute.options + '" id="att_options_' + attribute.slug + '"/>',
-            prepend = '<tr class="sscrow" id="row_' + attribute.slug + '"><td width="25%"><input type="text" name="att_order_' + attribute.slug + '" id="att_order_' + attribute.slug + '" value="' + order + '" size="3"></td><td width="25%"><input type="text" name="att_slug_' + attribute.slug + '" id="att_slug_' + attribute.slug + '" value="' + attribute.slug + '"readonly="readonly"></td><td width="25%"><input type="text" name="att_label_' + attribute.slug + '" id="att_label_' + attribute.slug + '" value="' + attribute.label + '"readonly="readonly"></td><td width="25%"><a title="Edit Attribute" class="edit button thickbox" href="admin-ajax.php?action=scpeditattribute&width=640&id=' + attribute.slug + '">Edit</a> <a title="Delete Attribute" class="delete button" href="#">Delete</a>' + hidden + "</td></tr>";
-        jQuery(row).replaceWith(prepend)
+            prepend = '<tr class="sscrow" id="row_' + attribute.slug + '"><td width="25%"><input type="text" name="att_order_' + attribute.slug + '" id="att_order_' + attribute.slug + '" value="' + order + '" size="3"></td><td width="25%"><input type="text" name="att_slug_' + attribute.slug + '" id="att_slug_' + attribute.slug + '" value="' + attribute.slug + '"readonly="readonly"></td><td width="25%"><input type="text" name="att_label_' + attribute.slug + '" id="att_label_' + attribute.slug + '" value="' + attribute.label + '"readonly="readonly"></td><td width="25%"><a class="edit button thickbox" href="admin-ajax.php?action=scpeditattribute&width=640&id=' + attribute.slug + '">'+ mv_shortcodespro_js_params.in_edit+'</a> <a class="delete button" href="#">'+ mv_shortcodespro_js_params.in_delete+'</a>' + hidden + "</td></tr>";
+        jQuery(row).replaceWith(prepend);
     }
 
     function callForError() {
-        jQuery("#errors").html("Please complete all required fields (*).")
+        jQuery("#errors").text( mv_shortcodespro_js_params.in_validation_alert); //"Please complete all required fields (*)."
     }
 
     function stringToSlug(str) {
@@ -259,6 +260,6 @@ jQuery(function () {
             str = str.replace(new RegExp(from.charAt(i), "g"), to.charAt(i))
         }
         str = str.replace(/[^a-z0-9]/g, "").replace(/\s+/g, "").replace(/-+/g, "");
-        return str
+        return str;
     }
 });
