@@ -143,7 +143,7 @@ if ( ! function_exists( 'mv_shortcodes_pro_sort_styles' ) ) {
 	add_action( 'admin_enqueue_scripts', 'mv_shortcodes_pro_sort_styles' );
 }
 
-if ( ! function_exists( 'shortcodes_pro_sort_scripts' ) ) {
+if ( ! function_exists( 'mv_shortcodes_pro_sort_scripts' ) ) {
 	
 	/** 
 	* Sort Scripts 
@@ -456,7 +456,7 @@ if ( ! function_exists( 'mv_shortcodes_pro_hide_ui' ) ) {
 	*/
 	
 	function mv_shortcodes_pro_hide_ui() {
-		echo shortcodes_pro_do_checkbox( 'hide-ui', __( 'Yes', 'shortcodes-pro' ), 'yes', __( 'Check to hide the &ldquo;Shortcodes&rdquo; menu.', 'shortcodes-pro' ) );
+		echo mv_shortcodes_pro_do_checkbox( 'hide-ui', __( 'Yes', 'shortcodes-pro' ), 'yes', __( 'Check to hide the &ldquo;Shortcodes&rdquo; menu.', 'shortcodes-pro' ) );
 	}
 }
 
