@@ -2,7 +2,7 @@
 /**
 * Shortcodes Pro Main Class
 *
-* @package Shortcodes Pro 
+* @package		Shortcodes Pro 
 * @author Matt Varone
 */
 
@@ -11,36 +11,52 @@ if ( ! class_exists( 'MV_Shortcodes_Pro' ) )
 	
 	/* SHORTCODES PRO CLASS
 	/////////////////////////////*/	
+	
 	class MV_Shortcodes_Pro
 	{	
-	
+
+		/** 
+		* Construct 
+		* 
+		* @package		Shortcodes Pro
+		* @subpackage	Main Class
+		* @since		1.0
+		*/
+			
 		function __construct()
 		{	
 			add_action( 'init', array( &$this, 'init' ) );
 		}
 		
-		function init() 
-		{
+		
+		/** 
+		* Init 
+		* 
+		* @package		Shortcodes Pro
+		* @subpackage	Main Class
+		* @since		1.1.0
+		*/
+		
+		function init() {
 			
 			add_action( 'after_setup_theme', array( &$this, 'add_thumbnail_support' ), 9999 );
 			
-			if ( is_admin() )
-			{
+			if ( is_admin() ) {
 				
 				// Get shortcodes buttons
 				$this->get_buttons_by_row();
 				
-				// check hide ui option
+				// get options
 				$options = get_option( 'shortcodespro' );
 
+				// check hide ui option
 				if ( ! isset( $options['hide-ui'] ) OR $options['hide-ui'] != "yes" ) 
 				add_action( 'admin_head', array( &$this, 'custom_plugin_header' ) );
 				
 				// TINY MCE BUTTONS
 				if ( current_user_can( 'edit_posts' ) && 
 					 current_user_can( 'edit_pages' ) && 
-					 get_user_option( 'rich_editing' ) == 'true' )
-				{
+					 get_user_option( 'rich_editing' ) == 'true' ) {
 					// Add all new buttons
 					add_filter( 'mce_external_plugins', array( &$this, 'add_plugins' ) );
 					
@@ -53,7 +69,7 @@ if ( ! class_exists( 'MV_Shortcodes_Pro' ) )
 					// Regresh TinyMCE version
 					add_filter( 'tiny_mce_version', array( &$this, 'refresh_mce_version' ) );
 					
-					// Do the quicktags babe'
+					// Do the quicktags
 					if ( $this->is_edit_page() ) {
 						if ( version_compare( get_bloginfo( 'version' ), '3.3' ) >= 0 )
 							add_action('admin_print_footer_scripts', array( &$this, 'generate_quicktags_33' ) );
@@ -67,12 +83,13 @@ if ( ! class_exists( 'MV_Shortcodes_Pro' ) )
 			
 		}
 		
+		
 		/** 
 		* Add Thumbnail Support 
 		* 
-		* @package Shortcodes Pro
-		* @subpackage Main Class
-		* @since 1.1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Main Class
+		* @since		1.1.0
 		*
 		*/
 		
@@ -81,21 +98,21 @@ if ( ! class_exists( 'MV_Shortcodes_Pro' ) )
 			add_theme_support( 'post-thumbnails' );
 		}
 
+
 		/** 
 		* Custom Plugin Header 
 		* 
 		* Print styles for Shortcodes Pro menu icon.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Main Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Main Class
+		* @since		1.0
 		*
 		*/
 		
-		function custom_plugin_header() 
-		{
+		function custom_plugin_header() {
 			
-			// Admin color scheme with fallback for 3.0 >
+			// Admin color scheme with fallback for 3.0-
 			
 			$current_user = wp_get_current_user();
 			
@@ -111,28 +128,26 @@ if ( ! class_exists( 'MV_Shortcodes_Pro' ) )
 			</style>
 			<?php
 		}
+
 		
 		/** 
 		* Get active buttons by row
 		* 
 		* Get all shortcodes with button=on and sort by row.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Main Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Main Class
+		* @since		1.0
 		*
 		*/
 		
-		function get_buttons_by_row()
-		{
+		function get_buttons_by_row() {
 			
 			$buttons = get_transient( 'sp.get.buttons.main' );
 			
-			if ( $buttons == "" OR empty( $buttons ) ) 
-			{
+			if ( $buttons == "" OR empty( $buttons ) ) {
 				
-				for ( $i=1; $i < 5; $i++ ) 
-				{ 
+				for ( $i=1; $i < 5; $i++ ) { 
 						$args = array( 
 							'post_type' => 'shortcodepro', 
 							'posts_per_page' => -1, 
@@ -154,8 +169,7 @@ if ( ! class_exists( 'MV_Shortcodes_Pro' ) )
 
 						$results =  new WP_Query( $args );
 						
-						if ( is_object( $results ) )
-						{
+						if ( is_object( $results ) ) {
 							while ( $results->have_posts() ) : $results->the_post();
 								
 								$sep_after = get_post_meta( $results->post->ID, 'sep_after', true );
@@ -178,24 +192,23 @@ if ( ! class_exists( 'MV_Shortcodes_Pro' ) )
 
 		}
 
+
 		/** 
 		* Register Buttons 
 		* 
 		* Register each button and separator on the correct row.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Main Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Main Class
+		* @since		1.0
 		*
 		*/
 		
-		function register_buttons( $buttons ) 
-		{  
+		function register_buttons( $buttons ) {  
 			
 			$filter = current_filter();
 					
-			switch ( $filter ) 
-			{
+			switch ( $filter ) {
 				
 				case 'mce_buttons_2':
 					$row = 'row-2';
@@ -214,22 +227,19 @@ if ( ! class_exists( 'MV_Shortcodes_Pro' ) )
 				break;
 			}
 									
-			if ( isset( $this->buttons_by_row[$row] ) && ! empty( $this->buttons_by_row[$row] ) ) 
-			{
+			if ( isset( $this->buttons_by_row[$row] ) && ! empty( $this->buttons_by_row[$row] ) ) {
+				
 				if ( $row != 'row-3' && $row != 'row-4' )
 				array_push( $buttons, 'separator' );
 
-				foreach ( $this->buttons_by_row[$row] as $button )
-				{
+				foreach ( $this->buttons_by_row[$row] as $button ) {
 
-					if ( is_array( $button ) ) 
-					{
+					if ( is_array( $button ) ) {
 						$safe_slug = $this->safe_slug( $button[0] );
 						array_push( $buttons, $safe_slug );
 						array_push( $buttons, 'separator' );
 					} 
-					else 
-					{
+					else {
 						$safe_slug = $this->safe_slug( $button );
 						array_push( $buttons, $safe_slug );
 					}
@@ -242,19 +252,19 @@ if ( ! class_exists( 'MV_Shortcodes_Pro' ) )
 	
 		}
 
+
 		/** 
 		* Add Plugins 
 		* 
 		* Adds the new buttons to the plugin array.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Main Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Main Class
+		* @since		1.0
 		*
 		*/
 		
-		function add_plugins( $plugin_array ) 
-		{
+		function add_plugins( $plugin_array ) {
 			if ( isset( $this->buttons_by_row ) && ! empty( $this->buttons_by_row ) ) 
 			{				
 				foreach ( $this->buttons_by_row as $row )
@@ -276,63 +286,63 @@ if ( ! class_exists( 'MV_Shortcodes_Pro' ) )
 			
 		}
 
+
 		/** 
 		* Refresh MCE Version 
 		* 
 		* Returns a new version number.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Main Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Main Class
+		* @since		1.0
 		*
 		*/
 		
-		function refresh_mce_version( $ver ) 
-		{
-		  ++$ver;
-		  return $ver;
+		function refresh_mce_version( $ver )  {
+		  return ++$ver;
 		}
+
 
 		/** 
 		* Is Edit Page 
 		* 
 		* Checks user is on a page with rte. 
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0.9.7
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0.9.7
 		*
 		*/
 		
-		function is_edit_page()
-		{
-			if ( strpos( $_SERVER['REQUEST_URI'], 'post.php' )
-			|| strpos( $_SERVER['REQUEST_URI'], 'post-new.php' )
-			|| strpos( $_SERVER['REQUEST_URI'], 'page-new.php' )
-			|| strpos( $_SERVER['REQUEST_URI'], 'page.php' ) )
-			return true;
+	    function is_edit_page()
+	    {
+	        global $pagenow;
 
-			return false;
-		}
+	        $pages = array( 'post.php','post-new.php','page-new.php','page.php' );
+
+	        if ( in_array( $pagenow, $pages ) )
+	        return true;
+
+	        return false;
+	    }
+		
 		
 		/**
 		* Process Quicktags for 3.3 upwards.
 		* 
 		* Return quicktags JS. 
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.1.0
 		*
 		*/
 		
-		function generate_quicktags_33()
-		{
+		function generate_quicktags_33() {
 			
 			$out = get_transient( 'sp.get.quicktags.main.33' );
 			
-			if ( $out == "" )
-			{
+			if ( $out == "" ) {
 			
 				$buttons = $this->get_quicktag_buttons();
 			
@@ -342,20 +352,22 @@ if ( ! class_exists( 'MV_Shortcodes_Pro' ) )
 				$out  = '
 					<script type="text/javascript">
 					/* <![CDATA[ */'."\n";
-			   				
-				foreach ( $buttons as $shortcode ) 
-				{
+								   		
+				$out .= "if (typeof window.QTags === 'function') {\n";
+			
+				foreach ( $buttons as $shortcode )  {
 					$shortcode_type = get_post_meta( $shortcode->ID, 'type', true );
 					$shortcode_quicktag = get_post_meta( $shortcode->ID, 'quicktag', true );
 				
-					if ( $shortcode_type == "wrap-content-with" AND $shortcode_quicktag == "on" )
-					{
+					if ( $shortcode_type == "wrap-content-with" AND $shortcode_quicktag == "on" ) {
 					
 						$shortcode_desc   = get_post_meta( $shortcode->ID, 'desc', true );
-						$out .= "QTags.addButton( '".$shortcode->post_name."', '".$shortcode->post_title."', '[do action=\"".$shortcode->post_name."\"]', '[/do]', '','".$shortcode_desc."' );";
+						$out .= "QTags.addButton( '".$shortcode->post_name."', '".$shortcode->post_title."', '[do action=\"".$shortcode->post_name."\"]', '[/do]', '','".$shortcode_desc."' );\n";
 					}
 				
 				}
+				
+		        $out .=	"}\n";
 	
 				$out .=	'/* ]]> */
 					</script>'."\n\n";
@@ -367,25 +379,24 @@ if ( ! class_exists( 'MV_Shortcodes_Pro' ) )
 			echo $out;
 
 		}
+
 		
 		/** 
 		* Process Quicktags for 3.2 downwards.
 		* 
 		* Return quicktags JS. 
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0.9.7
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0.9.7
 		*
 		*/		
 		
-		function generate_quicktags()
-		{
+		function generate_quicktags() {
 			
 			$out = get_transient( 'sp.get.quicktags.main' );
 			
-			if ( $out == "" )
-			{
+			if ( $out == "" ) {
 			
 				$buttons = $this->get_quicktag_buttons();
 			
@@ -395,17 +406,12 @@ if ( ! class_exists( 'MV_Shortcodes_Pro' ) )
 				$out  = '
 					<script type="text/javascript">
 					/* <![CDATA[ */'."\n";
-			   
-				$out .='
-						if ( wpQuickTagsToolbar = document.getElementById("ed_toolbar") ) {'."\n";
-					
-				foreach ( $buttons as $shortcode ) 
-				{
+			   					
+				foreach ( $buttons as $shortcode )  {
 					$shortcode_type = get_post_meta( $shortcode->ID, 'type', true );
 					$shortcode_quicktag = get_post_meta( $shortcode->ID, 'quicktag', true );
 				
-					if ( $shortcode_type == "wrap-content-with" AND $shortcode_quicktag == "on" )
-					{
+					if ( $shortcode_type == "wrap-content-with" AND $shortcode_quicktag == "on" ) {
 					
 						$shortcode_desc   = get_post_meta( $shortcode->ID, 'desc', true );
 					
@@ -434,9 +440,7 @@ if ( ! class_exists( 'MV_Shortcodes_Pro' ) )
 					}
 				
 				}
-					
-				$out .= '}'."\n\n";
-			
+								
 				$out .=	'/* ]]> */
 					</script>'."\n\n";
 			
@@ -447,51 +451,45 @@ if ( ! class_exists( 'MV_Shortcodes_Pro' ) )
 			echo $out;
 			
 		}
+
 		
 		/** 
 		* Get Quicktag Buttons
 		* 
 		* Get all shortcodes with qucktag=on.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0.9.7
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0.9.7
 		*
 		*/
 		
-		function get_quicktag_buttons()
-		{
-									
-			global $wpdb;
+		function get_quicktag_buttons() {
+			$args = array(
+				'post_type' => 'shortcodepro',
+				'port_status' => 'publish',
+				'meta_key' => 'quicktag',
+				'meta_value' => 'on',
+				'orderby' => 'menu_order',
+				'order' => 'ASC'
+			);
 			
-			$querystr = "
-			SELECT wposts.*
-			FROM $wpdb->posts wposts, $wpdb->postmeta wpostmeta
-			WHERE wposts.ID = wpostmeta.post_id 
-			AND wpostmeta.meta_key = 'quicktag' 
-			AND wpostmeta.meta_value = 'on'
-			AND wposts.post_status = 'publish' 
-			AND wposts.post_type = 'shortcodepro' 
-			ORDER BY wposts.menu_order ASC";
-		
-			$results = $wpdb->get_results( $querystr, OBJECT );
-						
-			return $results;
+			return get_posts($args);						
 		}
+
 		
 		/** 
 		* Safe Slug 
 		* 
 		* Create a safer version of a slug ready for JS.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Main Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Main Class
+		* @since		1.0
 		*
 		*/
 		
-		function safe_slug( $button )
-		{
+		function safe_slug( $button ) {
 			return str_replace( '-', '', $button );
 		}
 

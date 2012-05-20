@@ -2,37 +2,37 @@
 /**
 * Shortcodes Pro Options
 *
-* @package Shortcodes Pro
+* @package		Shortcodes Pro
 * @author Matt Varone
 */
 
-add_action( 'admin_menu', 'shortcodes_pro_create_options_page' );
-add_action( 'admin_init', 'shortcodes_pro_register_and_build_fields' );
-add_action( 'wp_ajax_shortcodespro_sort', 'shortcodes_pro_save_order' );
+add_action( 'admin_menu', 'mv_shortcodes_pro_create_options_page' );
+add_action( 'admin_init', 'mv_shortcodes_pro_register_and_build_fields' );
+add_action( 'wp_ajax_shortcodespro_sort', 'mv_shortcodes_pro_save_order' );
 
-if ( ! function_exists( 'shortcodes_pro_create_options_page' ) ) {
+if ( ! function_exists( 'mv_shortcodes_pro_create_options_page' ) ) {
 	
 	/** 
 	* Create Options Page 
 	* 
-	* @package Shortcodes Pro
-	* @subpackage Options
-	* @since 1.0
+	* @package		Shortcodes Pro
+	* @subpackage	Options
+	* @since		1.0
 	*
 	*/
 	
-	function shortcodes_pro_create_options_page() {
+	function mv_shortcodes_pro_create_options_page() {
 
 		// Get options
 		$options = get_option( 'shortcodespro' );
 
 		// Check hide-ui option
 		if ( ! isset( $options['hide-ui'] ) OR $options['hide-ui'] != "yes" )  {
-			add_submenu_page( 'edit.php?post_type=shortcodepro', 'Sort Buttons', __( 'Sort Buttons', 'shortcodes-pro' ), 'manage_options', basename( __FILE__ ), 'shortcodes_pro_sort_shortcodes' );
+			add_submenu_page( 'edit.php?post_type=shortcodepro', 'Sort Buttons', __( 'Sort Buttons', 'shortcodes-pro' ), 'manage_options', basename( __FILE__ ), 'mv_shortcodes_pro_sort_shortcodes' );
 		} 
 
 		// Create Options Page
-		add_options_page( 'Shortcodes Pro Options', 'Shortcodes Pro', 'administrator', __FILE__, 'shortcodes_pro_options_page' );
+		add_options_page( 'Shortcodes Pro Options', 'Shortcodes Pro', 'administrator', __FILE__, 'mv_shortcodes_pro_options_page' );
 	}
 }
 
@@ -42,20 +42,20 @@ if ( ! function_exists( 'shortcodes_pro_create_options_page' ) ) {
 |--------------------------------------------------------------------------
 */
 
-if ( ! function_exists( 'shortcodes_pro_sort_shortcodes' ) ) {
+if ( ! function_exists( 'mv_shortcodes_pro_sort_shortcodes' ) ) {
 	
 	/** 
 	* Sort Shortcodes
 	*
 	* Generates the sort page layout 
 	* 
-	* @package Shortcodes Pro
-	* @subpackage Options
-	* @since 1.0
+	* @package		Shortcodes Pro
+	* @subpackage	Options
+	* @since		1.0
 	*
 	*/
 	
-	function shortcodes_pro_sort_shortcodes() {
+	function mv_shortcodes_pro_sort_shortcodes() {
 	?>
 
 	<div class="wrap"> 
@@ -75,8 +75,8 @@ if ( ! function_exists( 'shortcodes_pro_sort_shortcodes' ) ) {
 		<ul id="shortcodes-target-row1" class="target-row" data="row1">
 			<?php 
 
-			$shortcode = shortcodes_pro_get_buttons( 'row-1' );
-			shortcodes_pro_do_buttons( $shortcode );
+			$shortcode = mv_shortcodes_pro_get_buttons( 'row-1' );
+			mv_shortcodes_pro_do_buttons( $shortcode );
 
 			?>
 
@@ -87,8 +87,8 @@ if ( ! function_exists( 'shortcodes_pro_sort_shortcodes' ) ) {
 		<ul id="shortcodes-target-row2" class="target-row" data="row2">
 			<?php 
 
-			$shortcode = shortcodes_pro_get_buttons( 'row-2' );
-			shortcodes_pro_do_buttons( $shortcode );
+			$shortcode = mv_shortcodes_pro_get_buttons( 'row-2' );
+			mv_shortcodes_pro_do_buttons( $shortcode );
 
 			?>
 		</ul>
@@ -98,8 +98,8 @@ if ( ! function_exists( 'shortcodes_pro_sort_shortcodes' ) ) {
 		<ul id="shortcodes-target-row3" class="target-row" data="row3">
 			<?php 
 
-			$shortcode = shortcodes_pro_get_buttons( 'row-3' );
-			shortcodes_pro_do_buttons( $shortcode );
+			$shortcode = mv_shortcodes_pro_get_buttons( 'row-3' );
+			mv_shortcodes_pro_do_buttons( $shortcode );
 
 			?>
 		</ul>
@@ -109,8 +109,8 @@ if ( ! function_exists( 'shortcodes_pro_sort_shortcodes' ) ) {
 		<ul id="shortcodes-target-row4" class="target-row" data="row4">
 			<?php 
 
-			$shortcode = shortcodes_pro_get_buttons( 'row-4' );
-			shortcodes_pro_do_buttons( $shortcode );
+			$shortcode = mv_shortcodes_pro_get_buttons( 'row-4' );
+			mv_shortcodes_pro_do_buttons( $shortcode );
 
 			?>
 		</ul>
@@ -120,18 +120,18 @@ if ( ! function_exists( 'shortcodes_pro_sort_shortcodes' ) ) {
 	}
 }
 
-if ( ! function_exists( 'shortcodes_pro_sort_styles' ) ) {
+if ( ! function_exists( 'mv_shortcodes_pro_sort_styles' ) ) {
 	
 	/** 
 	* Shortcode Sort page enqueue style
 	* 
-	* @package Shortcodes Pro
-	* @subpackage Options
-	* @since 1.0
+	* @package		Shortcodes Pro
+	* @subpackage	Options
+	* @since		1.0
 	*
 	*/
 	
-	function shortcodes_pro_sort_styles() {
+	function mv_shortcodes_pro_sort_styles() {
 		
 		global $pagenow;
 
@@ -140,7 +140,7 @@ if ( ! function_exists( 'shortcodes_pro_sort_styles' ) ) {
 			wp_enqueue_style( 'shortcodespro_sort', MV_SHORTCODES_PRO_URL . '/css/shortcodespro-sort.css' );
 	}
 	
-	add_action( 'admin_enqueue_scripts', 'shortcodes_pro_sort_styles' );
+	add_action( 'admin_enqueue_scripts', 'mv_shortcodes_pro_sort_styles' );
 }
 
 if ( ! function_exists( 'shortcodes_pro_sort_scripts' ) ) {
@@ -150,41 +150,76 @@ if ( ! function_exists( 'shortcodes_pro_sort_scripts' ) ) {
 	*
 	* Sort page JS scripts.
 	* 
-	* @package Shortcodes Pro
-	* @subpackage Options
-	* @since 1.0
+	* @package		Shortcodes Pro
+	* @subpackage	Options
+	* @since		1.0
 	*
 	*/
 	
-	function shortcodes_pro_sort_scripts() {
-		global $pagenow;
+	function mv_shortcodes_pro_sort_scripts() {
 
-		$pages = array( 'edit.php' );
-		if ( in_array( $pagenow, $pages ) ) {
-			wp_enqueue_script( 'jquery-ui-sortable' );
-			wp_enqueue_script( 'jquery-ui-draggable' );
-			wp_enqueue_script( 'jquery-ui-droppable' );
-			wp_enqueue_script( 'shortcodespro-sort', MV_SHORTCODES_PRO_URL . '/js/shortcodespro-sort.js', MV_SHORTCODES_PRO_VERSION );
+		if ( mv_shorcodes_pro_is_page_sort() ) {
+			wp_enqueue_script( 'shortcodespro-sort', MV_SHORTCODES_PRO_URL . '/js/shortcodespro-sort.js',array('jquery-ui-sortable','jquery-ui-droppable','jquery-ui-draggable'),  MV_SHORTCODES_PRO_VERSION, true );
+			
+			$params = array(
+			    'in_error' =>  __( 'There was an error saving the updates: ', 'shortcodes-pro' )
+			);
+			
+			wp_localize_script('shortcodespro-sort', 'mv_shortcodespro_sort_js_params', $params );
 		}
 	}
 	
-	add_action( 'admin_enqueue_scripts', 'shortcodes_pro_sort_scripts' );
+	add_action( 'admin_enqueue_scripts', 'mv_shortcodes_pro_sort_scripts' );
 }
 
-if ( ! function_exists( 'shortcodes_pro_save_order' ) ) {
+    
+if ( ! function_exists( 'mv_dynamic_to_top_is_page_sort' ) ) {   
+    
+    /** 
+     * Is page sort?
+     * 
+     * @package		Shortcodes Pro
+     * @subpackage	Options
+     * @since		1.0
+    */
+    
+    function mv_shorcodes_pro_is_page_sort()
+    {
+        global $pagenow;
+    
+        if ( function_exists( 'get_current_screen' ) ) {
+            $screen = get_current_screen();
+                                
+            if ( isset( $screen->base ) && $screen->base == 'shortcodepro_page_shortcodespro-options' )
+                return true;
+            else
+                return false;
+        } 
+        else {
+            $pages = array( 'edit.php' );
+
+            if ( in_array( $pagenow, $pages ) && isset( $_GET['page'] ) && $_GET['page'] == 'shortcodespro-options.php' )
+            return true;
+        }
+    
+        return false;
+    }
+}
+
+if ( ! function_exists( 'mv_shortcodes_pro_save_order' ) ) {
 	
 	/** 
 	* Save Order 
 	*
 	* Save the new buttons order.
 	* 
-	* @package Shortcodes Pro
-	* @subpackage Options
-	* @since 1.0
+	* @package		Shortcodes Pro
+	* @subpackage	Options
+	* @since		1.0
 	*
 	*/
 	
-	function shortcodes_pro_save_order() {
+	function mv_shortcodes_pro_save_order() {
 		global $wpdb;
 				
 		if ( ! isset( $_POST['order'] ) )
@@ -227,20 +262,20 @@ if ( ! function_exists( 'shortcodes_pro_save_order' ) ) {
 	}
 }
 
-if ( ! function_exists( 'shortcodes_pro_get_buttons' ) ) {
+if ( ! function_exists( 'mv_shortcodes_pro_get_buttons' ) ) {
 	
 	/** 
 	* Get Buttons 
 	*
 	* Get shortcodes/TinyMCE buttons.
 	* 
-	* @package Shortcodes Pro
-	* @subpackage Options
-	* @since 1.0
+	* @package		Shortcodes Pro
+	* @subpackage	Options
+	* @since		1.0
 	*
 	*/
 	
-	function shortcodes_pro_get_buttons( $row ) {
+	function mv_shortcodes_pro_get_buttons( $row ) {
 
 		$args = array( 
 			'post_type' => 'shortcodepro', 
@@ -265,20 +300,20 @@ if ( ! function_exists( 'shortcodes_pro_get_buttons' ) ) {
 	}
 }
 
-if ( ! function_exists( 'shortcodes_pro_do_buttons' ) ) {
+if ( ! function_exists( 'mv_shortcodes_pro_do_buttons' ) ) {
 	
 	/** 
 	* Do Button
 	*
 	* Print a shortcode button.
 	* 
-	* @package Shortcodes Pro
-	* @subpackage Options
-	* @since 1.0
+	* @package		Shortcodes Pro
+	* @subpackage	Options
+	* @since		1.0
 	*
 	*/
 	
-	function shortcodes_pro_do_buttons( $shortcode ) {
+	function mv_shortcodes_pro_do_buttons( $shortcode ) {
 
 		while ( $shortcode->have_posts() ) : $shortcode->the_post(); 
 
@@ -304,7 +339,7 @@ if ( ! function_exists( 'shortcodes_pro_do_buttons' ) ) {
 
 		echo '<div class="sortbutton">'.$img.'</div>';
 
-	 	echo shortcodes_pro_shorten_string( $shortcode->post->post_title, 6 ); ?><br/>
+	 	echo mv_shortcodes_pro_shorten_string( $shortcode->post->post_title, 6 ); ?><br/>
 
 		</li>		
 
@@ -320,20 +355,20 @@ if ( ! function_exists( 'shortcodes_pro_do_buttons' ) ) {
 	}
 }
 
-if ( ! function_exists( 'shortcodes_pro_shorten_string' ) ) {
+if ( ! function_exists( 'mv_shortcodes_pro_shorten_string' ) ) {
 	
 	/** 
 	* Shorten String Helper
 	*
 	* Returns a shorter version of a string.
 	* 
-	* @package Shortcodes Pro
-	* @subpackage Options
-	* @since 1.0
+	* @package		Shortcodes Pro
+	* @subpackage	Options
+	* @since		1.0
 	*
 	*/
 	
-	function shortcodes_pro_shorten_string( $text = null, $n = 20, $tail = '...' ) {
+	function mv_shortcodes_pro_shorten_string( $text = NULL, $n = 20, $tail = '...' ) {
 		if ( strlen( $text ) > $n ) {
 			return substr( $text , 0, $n ) . $tail;
 		} else {
@@ -348,41 +383,41 @@ if ( ! function_exists( 'shortcodes_pro_shorten_string' ) ) {
 |--------------------------------------------------------------------------
 */
 
-if ( ! function_exists( 'shortcodes_pro_register_and_build_fields' ) ) {
+if ( ! function_exists( 'mv_shortcodes_pro_register_and_build_fields' ) ) {
 	
 	/** 
 	* Register and Build Fields
 	*
 	* Register fields and sections.
 	* 
-	* @package Shortcodes Pro
-	* @subpackage Options
-	* @since 1.0
+	* @package		Shortcodes Pro
+	* @subpackage	Options
+	* @since		1.0
 	*
 	*/
 	
-	function shortcodes_pro_register_and_build_fields() {
+	function mv_shortcodes_pro_register_and_build_fields() {
 		register_setting( 'shortcodespro', 'shortcodespro' );
 
 		add_settings_section( 'settings_section', __( 'Settings', 'shortcodes-pro' ), '__return_true', __FILE__ );
-		add_settings_field( 'hide_ui', __( 'Hide menu:', 'shortcodes-pro' ), 'shortcodes_pro_hide_ui', __FILE__, 'settings_section' );
+		add_settings_field( 'hide_ui', __( 'Hide menu:', 'shortcodes-pro' ), 'mv_shortcodes_pro_hide_ui', __FILE__, 'settings_section' );
 	}
 }
 
-if ( ! function_exists( 'shortcodes_pro_options_page' ) ) {
+if ( ! function_exists( 'mv_shortcodes_pro_options_page' ) ) {
 	
 	/** 
 	* Options Page
 	*
 	* Options page layout.
 	* 
-	* @package Shortcodes Pro
-	* @subpackage Options
-	* @since 1.0
+	* @package		Shortcodes Pro
+	* @subpackage	Options
+	* @since		1.0
 	*
 	*/
 	
-	function shortcodes_pro_options_page() {
+	function mv_shortcodes_pro_options_page() {
 		
 	?>
 	<div class="wrap"> 
@@ -399,7 +434,7 @@ if ( ! function_exists( 'shortcodes_pro_options_page' ) ) {
 
 				<p><?php  _e( '<strong>Remember</strong>: <em>You can use WordPress built in <a href="import.php" title="Import">Import</a>/<a href="export.php" title="Export">Export</a> feature to backup and migrate your custom shortcodes</em>.', 'shortcodes-pro' ); ?></p>
 				
-				<p><small><?php _e( 'Brought to you by ', 'shortcodes-pro' ); ?> <a href="http://mattvarone.com" title="Matt Varone" target="_blank">Matt Varone</a> | <a href="http://www.mattvarone.com/donate" title="Tea for Matt!" target="_blank"><strong><?php _e( 'Donate', 'shortcodes-pro' ) ?></strong></a> &hearts;.</small></p>
+				<p><small><?php _e( 'Brought to you by ', 'shortcodes-pro' ); ?> <a href="http://mattvarone.com" title="Matt Varone" target="_blank">Matt Varone</a> | <a href="http://www.mattvarone.com/donate" target="_blank"><strong><?php _e( 'Donate', 'shortcodes-pro' ) ?></strong></a> &hearts;.</small></p>
 		</form>
 	</div>
 	<?php
@@ -407,38 +442,38 @@ if ( ! function_exists( 'shortcodes_pro_options_page' ) ) {
 
 }
 
-if ( ! function_exists( 'shortcodes_pro_hide_ui' ) ) {
+if ( ! function_exists( 'mv_shortcodes_pro_hide_ui' ) ) {
 	
 	/** 
 	* Hide UI
 	*
 	* Generate the option: Hide UI.
 	* 
-	* @package Shortcodes Pro
-	* @subpackage Options
-	* @since 1.0
+	* @package		Shortcodes Pro
+	* @subpackage	Options
+	* @since		1.0
 	*
 	*/
 	
-	function shortcodes_pro_hide_ui() {
+	function mv_shortcodes_pro_hide_ui() {
 		echo shortcodes_pro_do_checkbox( 'hide-ui', __( 'Yes', 'shortcodes-pro' ), 'yes', __( 'Check to hide the &ldquo;Shortcodes&rdquo; menu.', 'shortcodes-pro' ) );
 	}
 }
 
-if ( ! function_exists( 'shortcodes_pro_do_checkbox' ) ) {
+if ( ! function_exists( 'mv_shortcodes_pro_do_checkbox' ) ) {
 	
 	/** 
 	* Do Checkbox
 	*
 	* Generate a checkbox.
 	* 
-	* @package Shortcodes Pro
-	* @subpackage Options
-	* @since 1.0
+	* @package		Shortcodes Pro
+	* @subpackage	Options
+	* @since		1.0
 	*
 	*/
 	
-	function shortcodes_pro_do_checkbox( $meta, $label="Yes", $value='yes', $desc="" ) {
+	function mv_shortcodes_pro_do_checkbox( $meta, $label="Yes", $value='yes', $desc="" ) {
 
 		$options = get_option( 'shortcodespro' );
 
