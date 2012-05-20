@@ -11,7 +11,9 @@
 if( ! defined( 'WP_UNINSTALL_PLUGIN' ) )
 exit();
 
+// Delete all shortcodes
 global $wpdb;
+$wpdb->query("DELETE FROM $wpdb->posts WHERE post_type = 'shortcodepro'");
 
 // Delete options from options table 
 delete_option( 'shortcodespro' );
