@@ -53,6 +53,7 @@ Would you like to help translate the plugin into more languages? [Contact Matt](
 * Code refactoring
 * Better Internationalization
 * More Bug fixes
+* Uninstall now removes orphan shortcodes
 
 = 1.1.0.1 =
 * Code improvements
