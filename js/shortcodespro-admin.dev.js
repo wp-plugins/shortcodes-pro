@@ -3,7 +3,7 @@
  *
  * @package  Shortcodes Pro
  * @author   Matt Varone
- */
+*/
 var mv_shortcodespro_js_params;
 jQuery(function () {
     var scp_class = ".shortcodespro-meta-box ",
@@ -17,29 +17,29 @@ jQuery(function () {
         image_box = "#postimagediv";
     jQuery("#post_title").focus();
     jQuery(behavior_id + " option").each(function () {
-        elements.push(jQuery(this).prop("value"))
+        elements.push(jQuery(this).prop("value"));
     });
-    jQuery(behavior_id).change(function () {
+    jQuery(behavior_id).on( 'change', function () {
         var behaviour = jQuery(this).prop("value");
-        filterElements(behaviour)
+        filterElements(behaviour);
     });
     filterElements(jQuery(behavior_id).prop("value"));
-    jQuery(attributes_id).change(function () {
-        filterAttributes()
+    jQuery(attributes_id).on( 'change', function () {
+        filterAttributes();
     });
     filterAttributes();
-    jQuery(language_id).change(function () {
+    jQuery(language_id).on( 'change', function () {
         var status = jQuery(attributes_id).prop("checked");
         if (status === true) {
-            filterDesc(true)
+            filterDesc(true);
         } else {
-            filterDesc()
+            filterDesc();
         }
     });
     filterAttributesTitle();
     filterRichEditorFields();
-    jQuery("#button").change(function () {
-        filterRichEditorFields()
+    jQuery("#button").on( 'change', function () {
+        filterRichEditorFields();
     });
     jQuery(".add_attribute").live("click", function () {
         var slug = jQuery("#att_name").val(),
@@ -50,21 +50,21 @@ jQuery(function () {
             options = jQuery("#att_options").val();
         if (slug.length < 1 || label.length < 1 || type.length < 1 || value.length < 1) {
             callForError();
-            return false
+            return false;
         }
         if (type === "select" && options.length < 1) {
             callForError();
-            return false
+            return false;
         }
         slug = stringToSlug(slug);
         var attribute = new Attribute(slug, label, desc, type, value, options);
         if (jQuery("#att_slug_" + slug).length > 0) {
             tb_remove();
-            return false
+            return false;
         } else {
             addAttribute(attribute);
             filterAttributesTitle();
-            tb_remove()
+            tb_remove();
         }
     });
     jQuery(".update_attribute").live("click", function () {
@@ -78,15 +78,15 @@ jQuery(function () {
             options = jQuery("#att_options").val();
         if (label.length < 1 || type.length < 1 || value.length < 1) {
             callForError();
-            return false
+            return false;
         }
         if (type === "select" && options.length < 1) {
             callForError();
-            return false
+            return false;
         }
         var attribute = new Attribute(slug, label, desc, type, value, options);
         updateAttribute(attribute, "#row_" + old_slug, order);
-        tb_remove()
+        tb_remove();
     });
     jQuery(".button.delete").live("click", function () {
         var answer = confirm(mv_shortcodespro_js_params.in_delete_confirmation);
@@ -105,7 +105,7 @@ jQuery(function () {
             return false;
         }
     });
-    jQuery("#att_type").on("change", function () {
+    jQuery("#att_type").live("change", function () {
         var selected = jQuery(this).val();
         filterOverlay(selected);
     });
@@ -117,12 +117,12 @@ jQuery(function () {
             jQuery(attributes_row).stop().fadeTo(50, 0.5, function () {
                 jQuery(attributes_id).removeAttr("checked").prop("disabled", "disabled");
                 jQuery(".sscdesclong,.sscwidth,.sscheight").hide();
-            })
+            });
         } else {
             jQuery(".sscquicktag").hide();
             jQuery(attributes_row).stop().fadeTo(50, 1, function () {
                 jQuery(attributes_id).removeAttr("disabled");
-            })
+            });
         }
         jQuery.each(elements, function (index, value) {
             if (value === behaviour) {
@@ -130,7 +130,7 @@ jQuery(function () {
             } else {
                 jQuery("#" + value).hide();
             }
-        })
+        });
     }
 
     function FormatNumberLength(num, length) {
@@ -148,7 +148,7 @@ jQuery(function () {
             if (jQuery("#button").is(":checked")) {
                 jQuery(".sscdesclong,.sscwidth,.sscheight").show();
             }
-            filterDesc(true)
+            filterDesc(true);
         } else {
             jQuery(attributes_box).hide();
             jQuery(".sscdesclong,.sscwidth,.sscheight").hide();
@@ -177,7 +177,7 @@ jQuery(function () {
             jQuery(".sscinsert-css").show();
             jQuery(".sscinsert-html,.sscinsert-php").hide();
             jQuery(".sscexecute").prop("checked", "").hide();
-            break
+            break;
         }
         if (showAttributes === true) {
             jQuery(scp_class + ".attributes-desc").show();
@@ -224,7 +224,7 @@ jQuery(function () {
         this.desc = desc;
         this.type = type;
         this.value = value;
-        this.options = options
+        this.options = options;
     }
 
     function addAttribute(attribute) {
@@ -257,7 +257,7 @@ jQuery(function () {
         var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;",
             to = "aaaaeeeeiiiioooouuuunc------";
         for (var i = 0, l = from.length; i < l; i++) {
-            str = str.replace(new RegExp(from.charAt(i), "g"), to.charAt(i))
+            str = str.replace(new RegExp(from.charAt(i), "g"), to.charAt(i));
         }
         str = str.replace(/[^a-z0-9]/g, "").replace(/\s+/g, "").replace(/-+/g, "");
         return str;
