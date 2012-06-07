@@ -3,7 +3,7 @@
 * Shortcodes Pro Main Class
 *
 * @package		Shortcodes Pro 
-* @author Matt Varone
+* @author       Matt Varone
 */
 
 if ( ! class_exists( 'MV_Shortcodes_Pro' ) )

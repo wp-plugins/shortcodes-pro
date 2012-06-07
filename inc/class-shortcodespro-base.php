@@ -3,7 +3,7 @@
 * Shortcodes Pro Plugin Base Class
 *
 * @package		Shortcodes Pro 
-* @author Matt Varone
+* @author       Matt Varone
 */
 
 if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
@@ -621,7 +621,7 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 					{
 					
 						$old = get_post_meta( $post_id, $field['id'], true );
-						$new = $_POST[$field['id']];
+						$new = isset($_POST[$field['id']]) ? $_POST[$field['id']] : '';
 
 						if ( $new && $new != $old ) {
 							update_post_meta( $post_id, $field['id'], $new );

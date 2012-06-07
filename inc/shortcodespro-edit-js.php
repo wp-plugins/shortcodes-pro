@@ -2,8 +2,8 @@
 /**
 * Shortcodes Pro Edit JS
 *
-* @package Shortcodes Pro
-* @author Matt Varone
+* @package  Shortcodes Pro
+* @author   Matt Varone
 */
 
 // set the correct header

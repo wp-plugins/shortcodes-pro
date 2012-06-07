@@ -2,8 +2,8 @@
 /**
 * Shortcodes Pro Overlay Page
 *
-* @package Shortcodes Pro
-* @author Matt Varone
+* @package  Shortcodes Pro
+* @author   Matt Varone
 */
 
 // Start WordPress

@@ -3,7 +3,7 @@
 * Shortcodes Pro Options
 *
 * @package		Shortcodes Pro
-* @author Matt Varone
+* @author       Matt Varone
 */
 
 add_action( 'admin_menu', 'mv_shortcodes_pro_create_options_page' );

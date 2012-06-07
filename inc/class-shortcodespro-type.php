@@ -3,7 +3,7 @@
 * Shortcodes Pro Shortcodes Class
 *
 * @package		Shortcodes Pro
-* @author Matt Varone
+* @author       Matt Varone
 */
 
 /*
