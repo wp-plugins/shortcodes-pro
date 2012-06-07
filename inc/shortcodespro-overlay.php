@@ -2,8 +2,8 @@
 /**
 * Shortcodes Pro Overlay Page
 *
-* @package Shortcodes Pro
-* @author Matt Varone
+* @package  Shortcodes Pro
+* @author   Matt Varone
 */
 
 // Start WordPress
@@ -80,34 +80,36 @@ function init() {
 
 function checkSubmit()
 {
-	var shortcodeContent = ""; 
-	var selection = tinyMCEPopup.getWindowArg('selection');
+	var shortcodeContent = "",
+	    selection = tinyMCEPopup.getWindowArg('selection');
 	
-	if ( selection === "") { selection = "" }; 
+	if ( selection === "") { 
+	    selection = "" 
+	}; 
 		
-		shortcodeContent = '[do action="<?php echo $post->post_name; ?>"';
-		
-		var fields = new Array() 
+	shortcodeContent = '[do action="<?php echo $post->post_name; ?>"';
 	
-		<?php 
-		
-		// Print JS fields
-		$sp_base->js_fields($fields); 
+	var fields = new Array() 
 
-		?>
-		
-		if (selection === "") {
-		 shortcodeContent = shortcodeContent+'/]';
-		} else {
-		 selection = selection.replace(/^\s+|\s+$/g, "");
-		 shortcodeContent = shortcodeContent+']'+selection+'[/do]';
-		}
+	<?php 
 	
-		if(window.tinyMCE) {
-			window.tinyMCE.execInstanceCommand('content', 'mceInsertContent', false, shortcodeContent);
-			tinyMCEPopup.editor.execCommand('mceRepaint');
-			tinyMCEPopup.close();
-		}
+	// Print JS fields
+	$sp_base->js_fields($fields); 
+
+	?>
+	
+	if (selection === "") {
+	 shortcodeContent = shortcodeContent+'/]';
+	} else {
+	 selection = selection.replace(/^\s+|\s+$/g, "");
+	 shortcodeContent = shortcodeContent+']'+selection+'[/do]';
+	}
+
+	if(window.tinyMCE) {
+		window.tinyMCE.execInstanceCommand('content', 'mceInsertContent', false, shortcodeContent);
+		tinyMCEPopup.editor.execCommand('mceRepaint');
+		tinyMCEPopup.close();
+	}
 		
 	return false;
 }
@@ -120,10 +122,8 @@ function checkSubmit()
 	$img = "";
 
 	// check button image
-	if ( function_exists( 'has_post_thumbnail' ) )
-	{
-		if ( has_post_thumbnail( $post->ID ) ) 
-		{
+	if ( function_exists( 'has_post_thumbnail' ) ) {
+		if ( has_post_thumbnail( $post->ID ) ) {
 			$image_url = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ) );  
 			if ( isset( $image_url ) && ! empty( $image_url ) )
 			$img = '<img src="'.$image_url[0].'" alt="'.$post->post_title.'" width="20" height="20" />';
@@ -139,10 +139,7 @@ function checkSubmit()
 
 <div class="media-form"><form id="shortcode-form" action="#" method="get">
 
-<?php 
-	// Generate the overlay fields
-	$sp_base->do_overfields( $fields, true ); 
-?>
+<?php  $sp_base->do_overfields( $fields, true );  // Generate the overlay fields ?>
 
 <div class="mceActionPanel">
 	<div style="float: left">

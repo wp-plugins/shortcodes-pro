@@ -2,8 +2,8 @@
 /**
 * Shortcodes Pro Plugin Base Class
 *
-* @package Shortcodes Pro 
-* @author Matt Varone
+* @package		Shortcodes Pro 
+* @author       Matt Varone
 */
 
 if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
@@ -25,36 +25,35 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 		* 
 		* Fires the nested shortcodes parser.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0.8
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0.8
 		*
 		*/
 		
-		function sp_do_shortcode( $content ) 
-		{
+		function sp_do_shortcode( $content ) {
 			return $this->replace_do_shortcode( $content );
 		}
-		
+
+
 		/** 
 		* Replace Do Shortcode
 		* 
 		* Searches and replaces up to 3 levels of [do] shortcode.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0.8
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0.8
 		*
 		*/
 
-		function replace_do_shortcode( $content )
-		{
+		function replace_do_shortcode( $content ) {
 			// short shortcode
 			$pattern = '~\[do action\=\"[^\"]*\"\s?[^\]]*?\/]~';
 			$content =  preg_replace_callback( $pattern, array( &$this, 'replace_do_shortcode_callback' ), $content );
 
 			// normal shortcode/no nesting
-			$pattern = '~\[do action\=\"[^\"]*\"\s?[^\]\/]*\]([^\[\d\o\n]*)\[\/do\]~';
+			$pattern = '~\[do action\=\"[^\"]*\"\s?[^\]\/]*\]( [^\[\d\o\n]* )\[\/do\]~';
 			$content =  preg_replace_callback( $pattern, array( &$this, 'replace_do_shortcode_callback' ), $content );				
 
 			return $content;
@@ -66,15 +65,13 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 		* 
 		* Callback that replaces up to 3 levels of [do] shortcode.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0.8
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0.8
 		*
 		*/
 
-		function replace_do_shortcode_callback( $matches ) 
-		{
-			
+		function replace_do_shortcode_callback( $matches ) {
 			
 			$total_matches = count( $matches );
 			
@@ -127,19 +124,19 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 
 		}
 		
+		
 		/** 
 		* Register Shortcode
 		* 
 		* Register the "do" shortcode.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 
-		function _register_shortcode()
-		{
+		function _register_shortcode() {
 			add_shortcode( 'do', array( &$this, 'do_shortcode' ) );
 		}
 
@@ -149,14 +146,13 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 		* 
 		* Starts the shortcode process.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 
-		function do_shortcode( $atts = null, $content="" ) 
-		{
+		function do_shortcode( $atts = NULL, $content="" ){
 			global $wpdb;
 		
 			if ( ! isset( $atts['action'] ) )
@@ -167,7 +163,7 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 			{
 				$shortcode = $this->get_by_slug( $atts['action'], $this->post_type_id );
 			
-				if ( $shortcode == null ) return;
+				if ( $shortcode == NULL ) return;
 			
 				$options = get_post_custom( $shortcode->ID );
 				
@@ -181,19 +177,19 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 	
 		}
 		
+		
 		/** 
 		* Do Shortcode Content
 		* 
 		* Process shortcode based on behavior.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 
-		function _do_shortcode_content( $options, $content, $atts = null )
-		{
+		function _do_shortcode_content( $options, $content, $atts = NULL ) {
 			
 			if ( ! isset( $options['type'][0] ) )
 			return $content;
@@ -250,19 +246,19 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 			}
 		}
 		
+		
 		/** 
 		* Do Shortcode Attributes
 		* 
 		* Prepares the attribute values of a shortcode.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 	
-		function _do_shortcode_atts( $options, $out = null, $atts = null, $array = false )
-		{
+		function _do_shortcode_atts( $options, $out = NULL, $atts = NULL, $array = false ) {
 		
 			if ( $slugs = $this->get_attributes( $options ) )
 			{
@@ -301,19 +297,19 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 			return $out;
 		}
 
+
 		/** 
 		* Process Attributes
 		* 
 		* Process the attribute values of a shortcode.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 		
-		function process_attributes( $attributes, $options )
-		{
+		function process_attributes( $attributes, $options ) {
 			// Fields collector
 			$fields = array();
 
@@ -370,16 +366,15 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 		* 
 		* Cleans WordPress shortcode formatting.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0.5
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0.5
 		*
 		* @author http://donalmacarthur.com/articles/cleaning-up-wordpress-shortcode-formatting/
 		*
 		*/
 		
-		function clean_content( $content ) 
-		{
+		function clean_content( $content ) {
 		
 			$content = shortcode_unautop( $content );
 						
@@ -395,19 +390,19 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 
 		}
 		
+		
 		/** 
 		* Remove empty elements 
 		* 
 		* Fixes possible wrong formatting after fiddling with the text rich editor.
 		* 
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0.8
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0.8
 		* 
 		*/
 		
-		function remove_empty_elements( $content ) 
-		{
+		function remove_empty_elements( $content ){
 			return str_replace( array( '<p></p>', '<p> </p>', '<p>&nbsp;</p>' ), '', $content );
 		}
 		
@@ -419,117 +414,118 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 		* 
 		* Returns content object based on a slug.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 		
-		function get_by_slug( $post_name = null, $post_type = 'post' )
-		{
+		function get_by_slug( $post_name = NULL, $post_type = 'post' ) {
 
 			global $wpdb;
 			
 			if ( ! $post_name )
-				return null;
+				return NULL;
+							
+			$args = array( 
+			    'name' => $post_name, 
+			    'post_type' => $post_type, 
+			    'post_status' => 'publish', 
+			    'limit' => 1
+			 );
 			
-			$post = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_name = %s AND post_type= %s AND post_status = %s", $post_name, $this->post_type_id, 'publish' ) );
+			$post = get_posts( $args );
+			
+			if ( is_array( $post ) && isset( $post[0] ) )
+				return $post[0];
 
-			if ( $post )
-				return get_post( $post, OBJECT );
-
-			return null;
+			return NULL;
 		}
+		
 		
 		/** 
 		* Get Buttons
 		* 
 		* Get all shortcodes with button=on.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 		
-		function get_buttons()
-		{
+		function get_buttons() {
 			$buttons = get_transient( 'sp.get.buttons' );
 						
 			if ( $buttons != "" ) 
 			return $buttons;
 			
-			global $wpdb;
-			
-			$querystr = "
-			SELECT wposts.*
-			FROM $wpdb->posts wposts, $wpdb->postmeta wpostmeta
-			WHERE wposts.ID = wpostmeta.post_id 
-			AND wpostmeta.meta_key = 'button' 
-			AND wpostmeta.meta_value = 'on' 
-			AND wposts.post_status = 'publish' 
-			AND wposts.post_type = 'shortcodepro' 
-			ORDER BY wposts.menu_order ASC";
+    		$args = array( 
+    			'post_type' => 'shortcodepro', 
+    			'port_status' => 'publish', 
+    			'meta_key' => 'button', 
+    			'meta_value' => 'on', 
+    			'orderby' => 'menu_order', 
+    			'order' => 'ASC'
+    		 );			
 		
-			$results = $wpdb->get_results( $querystr, OBJECT );
+			$results = get_posts( $args );
 			
 			set_transient( 'sp.get.buttons', $results );
 			
 			return $results;
 		}
 		
+		
 		/** 
 		* Get Attributes
 		* 
 		* Get an array with all the attributes of a shortcode.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 		
-		function get_attributes( $options )
-		{
+		function get_attributes( $options ) {
 			if ( isset( $options['attributes'][0] ) && $options['attributes'][0] == 'on' && isset( $options['totalattr'][0] ) && $options['totalattr'][0] > 0 && isset( $options['attrvals'][0] ) )
 				return explode( '|', $options['attrvals'][0] );
 			
-			return null;
+			return NULL;
 		}
+
 
 		/** 
 		* Get Shortcode
 		* 
 		* Get a shortcode based on the post_name.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 		
-		function get_shortcode( $shortcode = null )
-		{
-			global $wpdb;
-
+		function get_shortcode( $shortcode = NULL ) {
 			if ( ! $shortcode ) return;
 						
-			return $wpdb->get_var( $wpdb->prepare( "SELECT ID, post_title, post_name FROM $wpdb->posts WHERE post_name = %s AND post_type= 'shortcodepro' AND post_status = 'publish'", esc_attr( $shortcode ) ) );
+			return $this->get_by_slug( $shortcode, 'shortcodepro' );
 		}
+		
 		
 		/** 
 		* Delete Cache
 		* 
 		* Delete all shortcodes cache stored.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 				
-		function delete_cache( $id )
-		{
+		function delete_cache( $id ) {
 			global $post;
 			
 			if ( isset( $post->post_type ) ) 
@@ -554,14 +550,13 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 		* 
 		* Takes care of saving the Shortcodes post type meta values. 
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 		
-		function custom_save_metaboxes( $post_id )
-		{
+		function custom_save_metaboxes( $post_id ) {
 			if ( ! isset( $_POST[$this->post_type_id.'_meta_box_nonce'] ) )
 			return $post_id;
 			
@@ -626,7 +621,7 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 					{
 					
 						$old = get_post_meta( $post_id, $field['id'], true );
-						$new = $_POST[$field['id']];
+						$new = isset($_POST[$field['id']]) ? $_POST[$field['id']] : '';
 
 						if ( $new && $new != $old ) {
 							update_post_meta( $post_id, $field['id'], $new );
@@ -640,19 +635,19 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 						
 		}
 		
+		
 		/** 
 		* Custom Meta-box Callback
 		* 
 		* Creates a meta-box.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 		
-		function custom_metabox_callback( $post, $meta_box )
-		{
+		function custom_metabox_callback( $post, $meta_box ) {
 			global $post;
 			$this->c = 1;
 
@@ -667,19 +662,19 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 			echo '</table>';
 		}
 		
+		
 		/** 
 		* Do Meta-box Content 
 		* 
 		* Generates the custom meta-boxes content
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 		
-		function do_metabox_content( $field, $edit = false, $width=null )
-		{
+		function do_metabox_content( $field, $edit = false, $width=NULL ) {
 			global $post;
 
 			switch ( $field['type'] )
@@ -733,8 +728,8 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 								<input type="text" name="att_order_'.$field['slg'].'" id="att_order_'.$field['slg'].'" value="'.$field['order'].'"size="3"></td><td width="25%">
 								<input type="text" name="att_slug_'.$field['slg'].'" id="att_slug_'.$field['slg'].'" value="'.$field['slug'].'" readonly="readonly" size="15"></td><td width="25%">
 								<input type="text" name="att_label_'.$field['slg'].'" id="att_label_'.$field['slg'].'" value="'.$field['label'].'" readonly="readonly" size="15"></td><td width="25%">
-								<a title="Edit Attribute" class="edit button thickbox" href="admin-ajax.php?action=scpeditattribute&width=640&id='.$field['slug'].'">'.__( 'Edit', 'shortcodes-pro' ).'</a> 
-								<a title="Delete Attribute" class="delete button" href="#">'.__( 'Delete', 'shortcodes-pro' ).'</a>'.$hidden.'</td></tr>';
+								<a title="'.__( 'Edit Attribute', 'shortcodes-pro' ).'" class="edit button thickbox" href="admin-ajax.php?action=scpeditattribute&width=640&id='.$field['slug'].'">'.__( 'Edit', 'shortcodes-pro' ).'</a> 
+								<a title="'.__( 'Delete Attribute', 'shortcodes-pro' ).'" class="delete button" href="#">'.__( 'Delete', 'shortcodes-pro' ).'</a>'.$hidden.'</td></tr>';
 							}
 
 						}
@@ -808,14 +803,14 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 					// get meta content
 					if ( $edit==true ) 
 					{
-						$meta = null;
+						$meta = NULL;
 					} 
 					else
 					{
 						if ( isset( $post ) )
 						$meta = get_post_meta( $post->ID, $field['id'], true );
 						else 
-						$meta = null;
+						$meta = NULL;
 					}
 					
 					$extra = "";
@@ -828,19 +823,19 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 
 		}
 		
+		
 		/** 
 		* Do Over-fields 
 		* 
 		* Generates the custom fields on a shortcode overlay. 
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 		
-		function do_overfields( $fields )
-		{
+		function do_overfields( $fields ) {
 			if ( ! empty( $fields ) )
 			{
 				// opening table
@@ -861,7 +856,7 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 					$field['desc'] = '';
 					
 					// no meta for this fields
-					$meta = null;
+					$meta = NULL;
 					
 					// Generate the field label
 					$this->field_label( $field, 140 );
@@ -910,19 +905,19 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 			}
 		}
 
+
 		/** 
 		* Field Type 
 		* 
 		* Route to correct field type creation. 
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/		
 
-		function field_type( $field, $meta=null, $extra=null )
-		{
+		function field_type( $field, $meta=NULL, $extra=NULL ) {
 			// organize data
 			$field['std']   = ( isset( $field['std'] ) ) ? $field['std'] : '';
 			$field['value'] = ( isset( $meta ) && trim( $meta ) != "" ) ? $meta : $field['std'];
@@ -977,19 +972,19 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 			}
 		}
 
+
 		/** 
 		* Fields Header 
 		* 
 		* Prints a field header. 
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/		
 
-		function fields_header( $field )
-		{
+		function fields_header( $field ) {
 			$this->c = count( $field['fields'] );
 			$p = floor( 100 / $this->c );
 			echo '<tr class="scp-'.$field['id'].'">';
@@ -999,19 +994,19 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 			echo '</tr>';
 		}
 		
+		
 		/** 
 		* Fields Row 
 		* 
 		* Prints a row of fields. 
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 		
-		function fields_row( $field )
-		{
+		function fields_row( $field ) {
 			echo '<tr class="ssc', $field['type'], '">';
 			$this->c = count( $field['fields'] );
 			
@@ -1031,100 +1026,98 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 			echo '</tr>';
 		}
 
+
 		/** 
 		* Field: Text 
 		* 
 		* Prints a text field. 
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 		
-		function field_text( $field, $meta=null )
-		{
+		function field_text( $field, $meta=NULL ) {
 			echo '<input type="text" name="'.$field['id'].'" id="'.$field['id'].'" value="'.$field['value'].'" size="'.$field['size'].'" style="width:'.$field['width'].'" />'.$field['desc'];
 		}
+		
 		
 		/** 
 		* Field: Text-area 
 		* 
 		* Prints a text-area field. 
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 		
-		function field_textarea( $field, $meta=null )
-		{
+		function field_textarea( $field, $meta=NULL ) {
 			if ( isset( $field['extra'] ) ) $cols = 'cols="'.$field['extra'].'"'; else $cols = "";
 			if ( isset( $field['rows'] ) ) $rows = $field['rows']; else $rows = '8';
 			
 			echo '<textarea name="'.$field['id'].'" id="'.$field['id'].'" '.$cols.' rows="'.$rows.'" style="width:'.$field['width'].'">'.$field['value'].'</textarea>'.$field['desc'];
 		}
 		
+		
 		/** 
 		* Field: Checkbox 
 		* 
 		* Prints a checkbox field. 
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 		
-		function field_checkbox( $field, $meta=null )
-		{
+		function field_checkbox( $field, $meta=NULL ) {
 			$field['value'] = ( isset( $field['value'] ) && trim( $field['value'] ) != "" ) ? ' checked="checked"' : '';			
 			echo '<input type="checkbox" name="'.$field['id'].'" id="'.$field['id'].'" '.$field['value'].' />'.$field['desc'];
 		}
+		
 		
 		/** 
 		* Field: Radio 
 		* 
 		* Prints a radio button. 
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 		
-		function field_radio( $field, $meta=null )
-		{
+		function field_radio( $field, $meta=NULL ) {
 			$field['value'] = ( isset( $field['value'] ) && trim( $field['value'] ) != "" ) ? ' checked="checked"' : '';			
 			foreach ( $field['options'] as $option )
 			echo ' <input type="radio" name="'.$field['id'].'" value="'.$option['value'].'"'.$field['value'].' /> '.$field['desc'];
 		}
+		
 		
 		/** 
 		* Field: Select 
 		* 
 		* Prints a select field. 
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 		
-		function field_select( $field, $meta=null )
-		{
+		function field_select( $field, $meta=NULL ) {
 			echo '<select name="'.$field['id'].'" id="'.$field['id'].'">';
 			foreach ( $field['options'] as $option ) 
 			{
 				
-				if ( ! is_array( $option ) )
-				{
+				if ( ! is_array( $option ) ) {
 					$selected = ( $field['value'] == sanitize_title( $option ) ) ? ' selected="selected"' : '';
 					echo '<option  value="'.sanitize_title( $option ).'" '.$selected.'>'.$option.'</option>';
 				}
-				else
-				{
+				else {
 					$selected = ( $field['value'] == $option['id'] ) ? ' selected="selected"' : '';
 					echo '<option  value="'.$option['id'].'"'.$selected.'>'.$option['title'].'</option>';
 				}
@@ -1132,36 +1125,36 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 			echo '</select>'.$field['desc'];
 		}
 		
+		
 		/** 
 		* Field: Button 
 		* 
 		* Prints a button element. 
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 		
-		function field_button( $field )
-		{
+		function field_button( $field ) {
 			if ( isset( $field['class'] ) ) $class = $field['class']; else $class = "";
 			echo '<a id="'.$field['id'].'" title="'.$field['name'].'" class="'.$class.' button" href="'.$field['action'].'">'.$field['name'].'</a>';
 		}
-				
+
+
 		/** 
 		* Field: Hidden 
 		* 
 		* Prints a hidden input. 
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 		
-		function field_hidden( $field, $meta=null )
-		{
+		function field_hidden( $field, $meta=NULL ) {
 			echo '<input type="hidden" name="'.$field['id'].'" id="'.$field['id'].'" value="'.$field['value'].'"/>';
 		}	
 		
@@ -1170,14 +1163,13 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 		* 
 		* Prints a disabled input. 
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 
-		function field_disabled( $field, $meta=null )
-		{
+		function field_disabled( $field, $meta=NULL ) {
 			echo '<input type="text" name="'.$field['id'].'" id="'.$field['id'].'" value="'.$field['value'].'" size="'.$field['size'].'" style="width:'.$field['width'].'" disabled="disabled" />'.$field['desc'];
 		}
 		
@@ -1186,14 +1178,13 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 		* 
 		* Prints a field label. 
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 		
-		function field_label( $field, $size = null )
-		{
+		function field_label( $field, $size = NULL ) {
 			if ( isset( $size ) ) $size = 'width="'.$size.'"'; else $size = 'width="20%"';
 			if ( isset( $field['req'] ) && $field['req'] == "true" ) $req = '<span class="alignright"><abbr title="required" class="required">*</abbr></span>'; else $req ='';
 			echo '<th '.$size.' valign="top"><label for="'.$field['id'].'">'.$field['name'].'</label>'.$req.'</th>';
@@ -1204,31 +1195,30 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 		* 
 		* Prints a field slug. 
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 
-		function field_slug( $field, $meta = null )
-		{
+		function field_slug( $field, $meta = NULL ) {
 			global $post;
-			echo '<input type="text" name="'.$field['id'].'" id="'.$field['id'].'" value="'.$post->post_name.'" size="30" disabled="disabled" />'.$field['desc'];
+			echo '<input type="text" name="'.$field['id'].'" id="'.$field['id'].'" value="'.$post->post_name.'" size="30" disabled="disabled" readonly="readonly"/>'.$field['desc'];
 		}
+
 
 		/** 
 		* JS fields 
 		* 
 		* Prints a set of attribute fields for JS. 
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 		
-		function js_fields( $fields, $execute = false )
-		{
+		function js_fields( $fields, $execute = false ) {
 			$i = 0;
 			$fields_out = "";
 			
@@ -1237,7 +1227,7 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 				$label = "sp_".$field['id'];
 				$value = '"\'+sp_'.$field['id'].'+\'"';
 
-				echo "	var ".$label." = document.getElementById('".$field['id']."').value;\n";
+				echo "	var ".$label." = document.getElementById( '".$field['id']."' ).value;\n";
 				
 				if ( $execute == false )
 				{
@@ -1269,14 +1259,13 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 		* 
 		* Checks for SSL. 
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 		
-		function is_ssl()
-		{
+		function is_ssl() {
 			if ( isset( $_SERVER['HTTPS'] ) ) 
 			{
 				if ( 'on' == strtolower( $_SERVER['HTTPS'] ) )
@@ -1299,14 +1288,13 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 		* 
 		* Checks if it's the admin custom edit/add page. 
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/		
 		
-		function is_admin_custom_post()
-		{
+		function is_admin_custom_post() {
 			global $pagenow;
 			
 			if ( $pagenow != "post.php" && $pagenow != "post-new.php" )
@@ -1317,38 +1305,38 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 			
 			return true;
 		}
-				
+
+
 		/** 
 		* Humanize String 
 		* 
 		* Convert a slug string into readable text. 
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 		
-		function humanize_string( $text = null )
-		{
+		function humanize_string( $text = NULL ) {
 			$text = str_replace( array( '-' ), ' ', $text );
 			$text = trim( ucwords( $text ) );			
 			return $text;
 		}
-				
+
+
 		/** 
 		* Sort Array By 
 		* 
 		* Sort associative array by an index. 
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/
 		
-		function sort_array_by( $array, $index, $order = 'asc', $natsort = FALSE, $case_sensitive = FALSE )  
-		{ 
+		function sort_array_by( $array, $index, $order = 'asc', $natsort = FALSE, $case_sensitive = FALSE ) { 
 		    if( is_array( $array ) && count( $array ) > 0 )  
 		    { 
 		       foreach( array_keys( $array ) as $key )  
@@ -1368,19 +1356,19 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 		  return $array; 
 		}
 		
+		
 		/** 
 		* Die Error 
 		* 
 		* Die and print error. 
 		*
-		* @package Shortcodes Pro
-		* @subpackage Base Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Base Class
+		* @since		1.0
 		*
 		*/		
 		
-		function die_error( $error="" )
-		{
+		function die_error( $error="" ) {
 			die( $error );
 			exit;
 		}

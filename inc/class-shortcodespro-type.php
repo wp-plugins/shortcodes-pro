@@ -2,8 +2,8 @@
 /**
 * Shortcodes Pro Shortcodes Class
 *
-* @package Shortcodes Pro
-* @author Matt Varone
+* @package		Shortcodes Pro
+* @author       Matt Varone
 */
 
 /*
@@ -18,13 +18,29 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 	class MV_Shortcodes_Pro_shortcodes extends MV_ShortcodesPro_Base
 	{
 	
+		/** 
+		* Construct 
+		* 
+		* @package		Shortcodes Pro
+		* @subpackage	Shortcodes Class
+		* @since		1.0
+		*/
+		
 		function __construct()
 		{
-			add_action('init', array( &$this, 'init' ) );
+			add_action( 'init', array( &$this, 'init' ) );
 		}
-			
-		function init()
-		{
+		
+		/** 
+		* Init 
+		* 
+		* @package		Shortcodes Pro
+		* @subpackage	Shortcodes Class
+		* @since		1.1.0
+		*/
+		
+		function init() {
+		    
 			// define cols
 			$this->c = 0;
 		
@@ -33,8 +49,7 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 			
 			if ( is_admin() )
 				$this->_custom_define_metaboxes(); // define metaboxes	
-			else 
-			{
+			else {
 					$this->_register_shortcode(); // registers main shortcode
 					
 					// Set the_content filters
@@ -49,14 +64,15 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 			add_action( 'wp_ajax_scpeditattribute', array( &$this, 'ajax_edit_attribute' ) );
 		}
 
+
 		/** 
 		* Register Post Type 
 		* 
 		* Register the shortcodes post type.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Shortcodes Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Shortcodes Class
+		* @since		1.0
 		*
 		*/
 		
@@ -75,7 +91,7 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 			register_post_type( $this->post_type_id, 
 			array( 
 				'labels' => array( 
-								'name' =>  'Shortcodes', 
+								'name' =>  __( 'Shortcodes', 'shortcodes-pro' ), 
 	        					'singular_name' => __( 'Shortcode', 'shortcodes-pro' ), 
 								'add_new' => __( 'Add New Shortcode', 'shortcodes-pro' ), 
 								'add_new_item' => __( 'Add New Shortcode', 'shortcodes-pro' ), 
@@ -144,15 +160,16 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 					
 			// free willy! 
 		}
-		
+
+
 		/** 
 		* Custom Meta-boxes 
 		* 
 		* Remove built-in meta-boxes and launch add meta-boxes.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Shortcodes Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Shortcodes Class
+		* @since		1.0
 		*
 		*/		
 
@@ -166,15 +183,16 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 			// generate meta boxes
 			$this->_custom_add_metaboxes();
 		}
-		
+
+
 		/** 
 		* Add Meta Boxes 
 		* 
 		* Add the custom meta-boxes.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Shortcodes Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Shortcodes Class
+		* @since		1.0
 		*
 		*/
 	
@@ -197,14 +215,15 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 
 		}
 
+
 		/** 
 		* Custom Featured Box 
 		* 
 		* Define the buttons image box.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Shortcodes Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Shortcodes Class
+		* @since		1.0
 		*
 		*/
 	
@@ -214,14 +233,15 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 			add_meta_box( 'postimagediv', __( 'Button Image', 'shortcodes-pro' ), 'post_thumbnail_meta_box', $this->post_type_id, 'side' );
 		}
 
+
 		/** 
 		* Custom Post Submit Box 
 		* 
 		* Modify the custom post submit box.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Shortcodes Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Shortcodes Class
+		* @since		1.0
 		*
 		*/
 		
@@ -283,14 +303,15 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 			<?php
 		}
 
+
 		/** 
 		* Custom Update Messages 
 		* 
 		* Modify the update messages.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Shortcodes Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Shortcodes Class
+		* @since		1.0
 		*
 		*/
 
@@ -317,14 +338,15 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 		
 		}
 
+
 		/** 
 		* Remove Autosave 
 		* 
 		* Disable autosave feature.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Shortcodes Class
-		* @since 1.0.7
+		* @package		Shortcodes Pro
+		* @subpackage	Shortcodes Class
+		* @since		1.0.7
 		*
 		*/
 		
@@ -347,14 +369,15 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 
 		}
 
+
 		/** 
 		* Filter Bulk Actions 
 		* 
 		* Remove the edit action.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Shortcodes Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Shortcodes Class
+		* @since		1.0
 		*
 		*/
 	
@@ -363,15 +386,16 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 			unset( $actions['edit'] );
 			return $actions;
 		}
-		
+
+
 		/** 
 		* Custom Help Content 
 		* 
 		* Prints links to the online help documentation 
 		* 
-		* @package Shortcodes Pro 
-		* @subpackage Shortcodes Class
-		* @since 1.0.9.5
+		* @package		Shortcodes Pro 
+		* @subpackage	Shortcodes Class
+		* @since		1.0.9.5
 		* 	 
 		*/
 		
@@ -422,7 +446,7 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 					'<a href="http://lab.mattvarone.com/plugins/shortcodes-pro/docs" target="_blank">'.__( 'Documentation', 'shortcodes-pro' ).'</a><br/>'.
 					'<a href="http://twitter.com/sksmatt" target="_blank">'.__( 'Updates', 'shortcodes-pro' ).'</a></p>'.
 					'<p><small>'.__( 'Version Installed:', 'shortcodes-pro' ).' <strong>'.MV_SHORTCODES_PRO_VERSION.'</strong>.</small> '.
-					'<small>'.__( 'Brought to you by', 'shortcodes-pro' ).' <a href="http://mattvarone.com" title="Matt Varone" target="_blank">Matt Varone</a>  | <a href="http://www.mattvarone.com/donate" title="Tea for Matt!" target="_blank"><strong>'.__( 'Donate', 'shortcodes-pro' ).'</strong></a> &hearts;.</small></p>';
+					'<small>'.__( 'Brought to you by', 'shortcodes-pro' ).' <a href="http://mattvarone.com" title="Matt Varone" target="_blank">Matt Varone</a>  | <a href="http://www.mattvarone.com/donate" target="_blank"><strong>'.__( 'Donate', 'shortcodes-pro' ).'</strong></a> &hearts;.</small></p>';
 			}
 
 			return $contextual_help;
@@ -437,9 +461,9 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 		* 
 		* Enqueue the Shortcodes Pro admin script.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Shortcodes Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Shortcodes Class
+		* @since		1.0
 		*
 		*/
 
@@ -448,17 +472,27 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 		
 			if ( ! $this->is_admin_custom_post() ) return;			
 			wp_enqueue_script( 'shortcodespro', plugins_url( MV_SHORTCODES_PRO_FOLDER.'/js/shortcodespro-admin.js' ), array( 'jquery', 'thickbox' ), MV_SHORTCODES_PRO_VERSION );
+			
+			$params = array(
+			    'in_edit' =>  __( 'Edit', 'shortcodes-pro' ),
+			    'in_delete' =>  __( 'Delete', 'shortcodes-pro' ),
+			    'in_delete_confirmation' =>  __( 'Delete this attribute?', 'shortcodes-pro' ),
+			    'in_validation_alert' =>  __( 'Please complete all required fields (*)', 'shortcodes-pro' ),
+			);
+			
+			wp_localize_script('shortcodespro', 'mv_shortcodespro_js_params', $params );
 		
 		}
+
 
 		/** 
 		* Custom Post Styles 
 		* 
 		* Enqueue the Shortcodes Pro admin styles.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Shortcodes Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Shortcodes Class
+		* @since		1.0
 		*
 		*/
 			
@@ -469,6 +503,7 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 			wp_enqueue_style( 'thickbox' );
 		}
 
+
 		/* CUSTOM POST LISTING METHODS 
 		/////////////////////////////*/
 
@@ -477,9 +512,9 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 		* 
 		* Remove the quick actions.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Shortcodes Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Shortcodes Class
+		* @since		1.0
 		*
 		*/
 	
@@ -494,14 +529,15 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 		    return $actions;
 		}
 
+
 		/** 
 		* Custom Columns 
 		* 
 		* Set the shortcodes type columns.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Shortcodes Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Shortcodes Class
+		* @since		1.0
 		*
 		*/
 	
@@ -517,15 +553,16 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 
 			return $new_columns;
 		}
-		
+
+
 		/** 
 		* Columns Content 
 		* 
 		* Return content for each column.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Shortcodes Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Shortcodes Class
+		* @since		1.0
 		*
 		*/		
 	
@@ -544,7 +581,8 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 				// Type of Shortcode
 				case 'behavior':
 					$behavior = $this->humanize_string( get_post_meta( $post->ID, 'type', true ) );
-					echo str_replace( array( 'Custom', 'With' ), '', $behavior );
+					$behavior = str_replace( array( ' Custom', ' With' ), '', $behavior );
+                    _e( $behavior, 'shortcodes-pro' );
 				break;
 				
 				// Row of Shortcode
@@ -554,7 +592,7 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 					if ( $row == "" ) 
 					echo '-';
 					else 
-					echo $row;
+					_e( $row, 'shortcodes-pro' );
 					
 				break;
 				
@@ -602,15 +640,16 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 				break;
 			} 
 		}
-		
+
+
 		/** 
 		* Column Register Sortable 
 		* 
 		* Allow listing sorting.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Shortcodes Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Shortcodes Class
+		* @since		1.0
 		*
 		*/
 				
@@ -623,14 +662,15 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 			return $columns;
 		}
 
+
 		/** 
 		* Column Order By 
 		* 
 		* Modify vars for order by.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Shortcodes Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Shortcodes Class
+		* @since		1.0
 		*
 		*/
 		
@@ -661,6 +701,7 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 			return $vars;
 		}
 	
+	
 		/* AJAX METHODS
 		/////////////////////////////*/
 		
@@ -669,9 +710,9 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 		* 
 		* Add new attribute overlay.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Shortcodes Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Shortcodes Class
+		* @since		1.0
 		*
 		*/		
 
@@ -688,35 +729,35 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 				</head>
 				<body>
 					<style type="text/css" media="screen">
-						#media-items h3 { font-family: Georgia,"Times New Roman",Times,serif;font-weight: normal;color: #5A5A5A; font-size:1.6em}
+						#media-items h3 { font-family: Georgia, "Times New Roman", Times, serif;font-weight: normal;color: #5A5A5A; font-size:1.6em}
 						#media-items {border-width: 1px;border-style: solid; padding:15px;border-color: #DFDFDF;}
 						#media-items th, #media-items label {font-weight:bold}
 						#media-items .desc { font-style: italic; color:#333; font-size:12px}
 						#media-items .button.add_attribute { margin-left:10px;}
-						#video-form,#media-items { overflow:hidden;}
+						#video-form, #media-items { overflow:hidden;}
 						#errors { color:red;font-weight:bold;}
 						.sscatt_options { display:none;}
 						#sphelp {padding: 15px;width: 90%;background: #f4f4f4;border: 1px dotted #ddd;font-style: normal;}
 					</style>
 
 					<script type="text/javascript" charset="utf-8">
-					jQuery(function() {
+					jQuery( function() {
 							
-							jQuery('#TB_ajaxContent').css('height','97%');
+							jQuery( '#TB_ajaxContent' ).css( 'height', '97%' );
 
-							var selected = jQuery('#att_type').val();
+							var selected = jQuery( '#att_type' ).val();
 
-							filterOverlay(selected);
+							filterOverlay( selected );
 							
-							function filterOverlay(selection) {
-								if(selection=="select") {
-									jQuery('.sscatt_options').show();
+							function filterOverlay( selection ) {
+								if( selection==="select" ) {
+									jQuery( '.sscatt_options' ).show();
 								} else {
-									jQuery('.sscatt_options').hide();
+									jQuery( '.sscatt_options' ).hide();
 								}
 							}
 
-					});
+					} );
 					</script>
 					<h3 class="media-title"><?php _e( 'New Attribute Details', 'shortcodes-pro' ) ?></h3> 
 					<form enctype="multipart/form-data" method="post" action="#" class="media-upload-form type-form validate" id="video-form"> 
@@ -742,15 +783,16 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 				<?php
 				exit();
 		}
-		
+
+
 		/** 
 		* Shortcodes Pro Edit Attribute ( Ajax ) 
 		* 
 		* Edit attribute overlay.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Shortcodes Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Shortcodes Class
+		* @since		1.0
 		*
 		*/
 
@@ -773,7 +815,7 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 			<body>
 				
 			<style type="text/css" media="screen">
-				#media-items h3 { font-family: Georgia,"Times New Roman",Times,serif;font-weight: normal;color: #5A5A5A; font-size:1.6em}
+				#media-items h3 { font-family: Georgia, "Times New Roman", Times, serif;font-weight: normal;color: #5A5A5A; font-size:1.6em}
 				#media-items {border-width: 1px;border-style: solid; padding:15px;border-color: #DFDFDF;}
 				#media-items th, #media-items label {font-weight:bold}
 				#media-items .desc { font-style: italic; color:#333; font-size:12px}
@@ -784,37 +826,37 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 			</style>
 		
 			<script type="text/javascript" charset="utf-8">
-				jQuery(function() {
+				jQuery( function() {
 					
-					jQuery('#TB_ajaxContent').css('height','97%');
+					jQuery( '#TB_ajaxContent' ).css( 'height', '97%' );
 				
-					var slug = '<?php echo $attr_id; ?>';
-					var label = jQuery('#att_label_'+slug).val();
-					var desc = jQuery('#att_desc_'+slug).val();
-					var type = jQuery('#att_type_'+slug).val();
-					var value = jQuery('#att_value_'+slug).val();
-					var options = jQuery('#att_options_'+slug).val();
+					var slug = '<?php echo $attr_id; ?>', 
+					    label = jQuery( '#att_label_'+slug ).val(), 
+					    desc = jQuery( '#att_desc_'+slug ).val(), 
+					    type = jQuery( '#att_type_'+slug ).val(), 
+					    value = jQuery( '#att_value_'+slug ).val(), 
+					    options = jQuery( '#att_options_'+slug ).val();
 				
-					jQuery('#att_name').val(slug).attr('disabled','disabled');
-					jQuery('#att_value').val(value);
-					jQuery('#att_options').val(options);
-					jQuery('#att_label').val(label);
-					jQuery('#att_type').val(type);
-					jQuery('#att_desc').val(desc);
+					jQuery( '#att_name' ).val( slug ).attr( 'disabled', 'disabled' );
+					jQuery( '#att_value' ).val( value );
+					jQuery( '#att_options' ).val( options );
+					jQuery( '#att_label' ).val( label );
+					jQuery( '#att_type' ).val( type );
+					jQuery( '#att_desc' ).val( desc );
 					
-					var selected = jQuery('#att_type').val();
+					var selected = jQuery( '#att_type' ).val();
 										
-					filterOverlay(selected);
+					filterOverlay( selected );
 										
-					function filterOverlay(selection) {
-						if(selection=="select") {
-							jQuery('.sscatt_options').show();
+					function filterOverlay( selection ) {
+						if( selection==="select" ) {
+							jQuery( '.sscatt_options' ).show();
 						} else {
-							jQuery('.sscatt_options').hide();
+							jQuery( '.sscatt_options' ).hide();
 						}
 					}
 
-				});
+				} );
 			</script>
 
 			
@@ -843,6 +885,7 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 			exit();			
 		}
 
+
 		/* CUSTOM METABOXES FIELDS
 		/////////////////////////////*/
 
@@ -851,9 +894,9 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 		* 
 		* Define the shortcodes type fields.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Shortcodes Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Shortcodes Class
+		* @since		1.0
 		*
 		*/
 
@@ -894,9 +937,9 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 					'type'=>'select', 
 					'std' => 'wrap-content-with', 
 					'options' => array( 
-						'wrap-content-with' =>  __( 'Wrap content with', 'shortcodes-pro' ), 
-						'insert-custom-code' => __( 'Insert custom code', 'shortcodes-pro' )
-					)), 
+						array( 'id'=> 'wrap-content-with', 'title' =>  __( 'Wrap content with', 'shortcodes-pro' ) ), 
+						array( 'id'=> 'insert-custom-code', 'title' => __( 'Insert custom code', 'shortcodes-pro' ) )
+					 ) ), 
 						
 					array( 
 					'name' => __( 'Attributes', 'shortcodes-pro' ), 
@@ -995,7 +1038,7 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 					'id' => 'insert-html', 
 					'type'=>'textarea', 
 					'std' => ''
-					 ),
+					 ), 
 		
 					array( 
 					'name' => __( 'Code', 'shortcodes-pro' ), 
@@ -1037,11 +1080,11 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 					'class' => 'rowbutton', 
 					'type'=>'select', 
 					'options' => array( 
-						'row-1' =>  __( 'Row 1', 'shortcodes-pro' ), 
-						'row-2' =>  __( 'Row 2', 'shortcodes-pro' ), 
-						'row-3' =>  __( 'Row 3', 'shortcodes-pro' ), 
-						'row-4' =>  __( 'Row 4', 'shortcodes-pro' ),
-					), 
+                       'row-1' =>  array( 'id' => 'row-1', 'title' => __( 'Row 1', 'shortcodes-pro' ) ),
+                       'row-2' =>  array( 'id' => 'row-2', 'title' => __( 'Row 2', 'shortcodes-pro' ) ),
+                       'row-3' =>  array( 'id' => 'row-3', 'title' => __( 'Row 3', 'shortcodes-pro' ) ),
+                       'row-4' =>  array( 'id' => 'row-4', 'title' => __( 'Row 4', 'shortcodes-pro' ) ),
+					 ), 
 					'std' => 'row-1' ), 
 		
 					array( 
@@ -1085,20 +1128,20 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 			 ); // meta_boxes
 		}
 
+
 		/** 
 		* Set Attributes Fields 
 		* 
 		* Define the attribute fields.
 		*
-		* @package Shortcodes Pro
-		* @subpackage Shortcodes Class
-		* @since 1.0
+		* @package		Shortcodes Pro
+		* @subpackage	Shortcodes Class
+		* @since		1.0
 		*
 		*/
 	
 		function set_attributes_fields()
 		{
-		
 		
 			$this->attributes_fields = array( 
 			
@@ -1128,10 +1171,10 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 				'req' => 'true', 
 				'std' => '', 
 				'options' => array( 
-					'text' =>  __( 'Text', 'shortcodes-pro' ), 
-					'textarea' =>  __( 'Textarea', 'shortcodes-pro' ), 
-					'select' =>  __( 'Select', 'shortcodes-pro' ), 
-				 ) ), 
+                        'text' =>  array( 'id' => 'text', 'title' => __( 'Text', 'shortcodes-pro' ) ),
+                        'textarea' =>  array( 'id' => 'textarea', 'title' => __( 'Textarea', 'shortcodes-pro' ) ),
+                        'select' =>  array( 'id' => 'select', 'title' => __( 'Select', 'shortcodes-pro' ) ),
+                )),
 			
 				array( 
 				'name' => __( 'Options', 'shortcodes-pro' ), 

@@ -2,8 +2,8 @@
 /**
 * Shortcodes Pro Edit JS
 *
-* @package Shortcodes Pro
-* @author Matt Varone
+* @package  Shortcodes Pro
+* @author   Matt Varone
 */
 
 // set the correct header
@@ -58,7 +58,7 @@ if ( $out == "" )
 			// verify the overlay is needed
 			if ( $shortcode_type == 'insert-custom-code' ) 
 			{
-				if ( $total_attributes == null OR ( int )$total_attributes == 0 OR $shortcode_attributes != "on" )
+				if ( $total_attributes == NULL OR ( int )$total_attributes == 0 OR $shortcode_attributes != "on" )
 				$shortcode_type = 'default';
 			}
 			
@@ -92,7 +92,7 @@ if ( $out == "" )
 					{
 						$out .= "
 
-							if ( sel.length == 0  ) {
+							if ( sel.length === 0  ) {
 								alert('".__('Please make a selection.', 'shortcodes-pro')."');
 								return;
 							}";
@@ -119,20 +119,17 @@ if ( $out == "" )
 					$out .= "onclick : function() {  
 						
 						// get selection
-						var sel = ed.selection.getContent({format : 'html'});
-						var sel2 = ed.selection.getContent({format : 'raw'});
-																	
-						var bm  = ed.selection.getBookmark();
-						
-						// trim spaces
-						sel = sel.replace(/^\s+|\s+$/g, '');";
+						var sel = ed.selection.getContent({format : 'html'}),
+						    sel2 = ed.selection.getContent({format : 'raw'}),
+						    bm  = ed.selection.getBookmark(),
+						    sel = sel.replace(/^\s+|\s+$/g, '');";
 						
 					// check if empty prevent is on
 					if ( $shortcode_prevent == "on" )
 					{
 						$out .= "
 
-							if ( sel.length == 0  ) {
+							if ( sel.length === 0  ) {
 								alert('".__('Please make a selection.', 'shortcodes-pro')."');
 								return;
 							}";
@@ -145,8 +142,7 @@ if ( $out == "" )
 							// content 
 							var content = '[do action=\"".$shortcode->post_name."\"]' + sel + '[/do]';
 							ed.execCommand('mceReplaceContent', false, content);
-						} 
-						else {
+						} else {
 							// no content
 							var content = '[do action=\"".$shortcode->post_name."\"/]';
 							ed.execCommand('mceReplaceContent', false, content);
