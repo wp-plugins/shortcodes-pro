@@ -2,9 +2,9 @@
 Contributors: sksmatt
 Donate link: http://www.mattvarone.com/donate/
 Tags: shortcodes, TinyMCE, quicktags, buttons, generator, editor, toolbar
-Requires at least: 3.3
-Tested up to: 3.3.2
-Stable tag: 1.1.1.3
+Requires at least: 3.4
+Tested up to: 3.4.1
+Stable tag: 1.1.2
 
 Shortcodes Pro allows quick and easy creation of WordPress shortcodes and TinyMCE rich editor buttons from the comfort of the WordPress interface.
 
@@ -48,6 +48,12 @@ Would you like to help translate the plugin into more languages? [Contact Matt](
 5. Simple Shortcode on action.
 
 == Change log ==
+
+= 1.1.2 = 
+* Fixes bug with shortcodes starting with a number
+* Fixes bug on quicktags
+* Added correct escaping for all js output
+* Code refactoring
 
 = 1.1.1.3 = 
 * More Bug fixes
