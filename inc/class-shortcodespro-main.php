@@ -235,13 +235,11 @@ if ( ! class_exists( 'MV_Shortcodes_Pro' ) )
 				foreach ( $this->buttons_by_row[$row] as $button ) {
 
 					if ( is_array( $button ) ) {
-						$safe_slug = $this->safe_slug( $button[0] );
-						array_push( $buttons, $safe_slug );
+						array_push( $buttons, shortcodes_pro_safe_slug( $button[0] ) );
 						array_push( $buttons, 'separator' );
 					} 
 					else {
-						$safe_slug = $this->safe_slug( $button );
-						array_push( $buttons, $safe_slug );
+						array_push( $buttons, shortcodes_pro_safe_slug( $button ) );
 					}
 
 				}
@@ -276,7 +274,7 @@ if ( ! class_exists( 'MV_Shortcodes_Pro' ) )
 						else
 						$button_name = $buttons;	
 			
-						$safe_slug = str_replace( '-', '', $button_name );
+						$safe_slug = shortcodes_pro_safe_slug( $button_name );
 						$plugin_array[$safe_slug] = plugins_url( MV_SHORTCODES_PRO_FOLDER.'/inc/shortcodespro-edit-js.php' );
 					}
 				} 			
@@ -475,22 +473,6 @@ if ( ! class_exists( 'MV_Shortcodes_Pro' ) )
 			);
 			
 			return get_posts($args);						
-		}
-
-		
-		/** 
-		* Safe Slug 
-		* 
-		* Create a safer version of a slug ready for JS.
-		*
-		* @package		Shortcodes Pro
-		* @subpackage	Main Class
-		* @since		1.0
-		*
-		*/
-		
-		function safe_slug( $button ) {
-			return str_replace( '-', '', $button );
 		}
 
 	}		

@@ -15,7 +15,7 @@ require_once( '../../../../wp-load.php' );
 if ( ! defined( 'MV_SHORTCODES_PRO_VERSION' ) ) 
 die( __( 'Shortcodes Pro error. Could not initialize WordPress', 'shortcodes-pro' ) );
 
-$out = get_transient( 'sp.get.buttons.edit' );
+$out = "";//get_transient( 'sp.get.buttons.edit' );
 
 if ( $out == "" ) 
 {
@@ -53,7 +53,7 @@ if ( $out == "" )
 			$shortcode_height = ( ( int )$shortcode_height_meta > 300 ) ? $shortcode_height_meta : 300;
 
 			// remove slashes from the slug
-			$safe_slug = str_replace( '-', '', $shortcode->post_name );
+			$safe_slug = shortcodes_pro_safe_slug( $shortcode->post_name );
 
 			// verify the overlay is needed
 			if ( $shortcode_type == 'insert-custom-code' ) 
@@ -103,8 +103,8 @@ if ( $out == "" )
 						
 									ed.windowManager.open({
 										file : url + '/shortcodespro-overlay.php?shortcode=".$shortcode->post_name."',
-										width : ".$shortcode_width." + ed.getLang('".$safe_slug.".delta_width', 0),
-										height : ".$shortcode_height." + ed.getLang('".$safe_slug.".delta_height', 0),
+										width : ".esc_js($shortcode_width)." + ed.getLang('".$safe_slug.".delta_width', 0),
+										height : ".esc_js($shortcode_height)." + ed.getLang('".$safe_slug.".delta_height', 0),
 										inline : 1,
 										scrollbars : 'yes',
 									}, {
@@ -166,10 +166,10 @@ if ( $out == "" )
 			        },
 			        getInfo : function() {
 			            return {
-			                longname : '".$shortcode_title."',
+			                longname : '".esc_js($shortcode_title)."',
 			                author : 'Shortcodes Pro',
-			                authorurl : '".get_bloginfo( 'url' )."',
-			                infourl : 'http://www.mattvarone.com',
+			                authorurl : '".esc_js(get_bloginfo( 'url' ))."',
+			                infourl : '".esc_js(get_bloginfo( 'url' ))."',
 			                version : '".MV_SHORTCODES_PRO_VERSION."'
 			            };
 			        }
