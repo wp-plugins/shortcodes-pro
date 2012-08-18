@@ -225,7 +225,7 @@ if ( ! function_exists( 'mv_shortcodes_pro_save_order' ) ) {
 		if ( ! isset( $_POST['order'] ) )
 		return;
 		 
-		$order = explode( ', ', $_POST['order'] );
+		$order = explode( ',', $_POST['order'] );
 		$counter = 0;
  		$last  = 0;
 
