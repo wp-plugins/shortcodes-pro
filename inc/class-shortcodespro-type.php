@@ -111,7 +111,7 @@ if ( ! class_exists( 'MV_Shortcodes_Pro_shortcodes' ) )
 				'exclude_from_search' => true,
 				'query_var' => true,
 				'show_ui' => $show_ui,
-				'capability_type' => mv_shortcodes_pro_get_capability(),
+				'capability_type' => 'post',
 				'can_export' => true,
 				'menu_position' => 200,
 				'rewrite' => false,
