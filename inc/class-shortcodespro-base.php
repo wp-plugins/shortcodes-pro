@@ -53,7 +53,7 @@ if ( ! class_exists( 'MV_ShortcodesPro_Base' ) )
 			$content =  preg_replace_callback( $pattern, array( &$this, 'replace_do_shortcode_callback' ), $content );
 
 			// normal shortcode/no nesting
-			$pattern = '~\[do action\=\"[^\"]*\"\s?[^\]\/]*\]( [^\[\d\o\n]* )\[\/do\]~';
+			$pattern = '~\[do action\=\"[^\"]*\"\s?[^\]\/]*\]( [^\[\do\n]* )\[\/do\]~';
 			$content =  preg_replace_callback( $pattern, array( &$this, 'replace_do_shortcode_callback' ), $content );
 
 			return $content;
